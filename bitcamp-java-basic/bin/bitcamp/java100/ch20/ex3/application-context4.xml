@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 객체 생성 순서 
+        의존 객체를 먼저 만들기 위해 <bean> 태그의 순서를 
+        개발자가 직접 조정할 필요는 없다.
+        스프링 IoC 컨테이너는 해당 객체가 필요하면 알아서 
+        순서를 조정하여 생성한다.
+        즉 Car의 의존 객체인 Engine을 나중에 선언해도 된다.
+    -->
+          
+    <bean id="c1" class="bitcamp.java100.ch20.ex3.Car">
+        <property name="engine" ref="e1"/>
+    </bean>
+    
+    <bean id="e1" class="bitcamp.java100.ch20.ex3.Engine"
+          p:name="비트엔진" p:cc="5000" p:valve="16"/>
+</beans>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

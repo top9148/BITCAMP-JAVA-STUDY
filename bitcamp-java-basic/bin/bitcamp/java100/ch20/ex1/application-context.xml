@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+    
+    <!-- 생성할 객체의 정보를 등록한다. -->
+    <bean id="str1" class="java.lang.String"/>
+    <!-- String str1 = new String(); -->
+    
+    <bean id="str2" class="java.lang.String">
+        <constructor-arg type="java.lang.String" value="Hello!"/>
+    </bean>
+    <!-- String str2 = new String("Hello!"); -->
+    
+</beans>
+
+
+
+
+
+
+
+

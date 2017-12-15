@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:c="http://www.springframework.org/schema/c"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 생성자 호출 III - 객체 주소를 전달하기 
+         => 자바 원시 데이터 타입과 문자열은 다음과 같이 파라미터 값을 전달한다.
+            <constructor-arg><value>홍길동</value></constructor-arg>
+            c:파라미터명=값
+         => 그 외 객체 주소를 전달할 때는 다음과 같이 해야 한다.
+            <constructor-arg><ref bean="객체주소"/></constructor-arg>
+            c:파라미터명-ref="객체주소"
+    -->
+    
+    
+    <!-- 자바 원시타입의 값을 전달하기 -->
+    <bean class="bitcamp.java100.ch20.ex2.MyClass3">
+        <constructor-arg type="String"><value>홍길동</value></constructor-arg>
+    </bean>
+    <bean class="bitcamp.java100.ch20.ex2.MyClass3">
+        <constructor-arg type="String" value="홍길동"/>
+    </bean>
+    <bean class="bitcamp.java100.ch20.ex2.MyClass3" 
+          c:name="홍길동"/>
+    
+    <bean class="bitcamp.java100.ch20.ex2.MyClass3">
+        <constructor-arg type="float"><value>1.5</value></constructor-arg>
+        <constructor-arg type="float"><value>1.2</value></constructor-arg>
+    </bean>
+    <bean class="bitcamp.java100.ch20.ex2.MyClass3">
+        <constructor-arg type="float" value="1.5"/>
+        <constructor-arg type="float" value="1.2"/>
+    </bean>
+    <bean class="bitcamp.java100.ch20.ex2.MyClass3" 
+          c:left="1.5" c:right="1.2"/>
+    
+    
+    <!-- 파라미터로 객체 주소를 받기 -->
+    <bean id="obj1" class="bitcamp.java100.ch20.ex2.MyClass"/>
+    <bean id="obj2" class="bitcamp.java100.ch20.ex2.MyClass2"/>
+    
+    <!-- 값의 타입으로 생성자를 명확하게 선택할 수 있다면,
+         굳이 파라미터 타입을 지정할 필요가 없다. 
+         객체 주소를 지정할 때는 <ref> 태그를 사용한다.-->
+    <bean class="bitcamp.java100.ch20.ex2.MyClass3">
+        <constructor-arg><ref bean="obj1"/></constructor-arg>
+    </bean>
+    <bean class="bitcamp.java100.ch20.ex2.MyClass3">
+        <constructor-arg><ref bean="obj2"/></constructor-arg>
+    </bean>
+    
+    <!-- 파라미터에 객체 주소를 지정할 때는 ref 속성을 사용한다. -->
+    <bean class="bitcamp.java100.ch20.ex2.MyClass3">
+        <constructor-arg ref="obj1"/>
+    </bean>
+    
+    <!-- c 속성으로 지정할 때는 다음과 같이 속성 이름을 적어야 한다.
+         c:파라미터명-ref="객체주소" -->
+    <bean class="bitcamp.java100.ch20.ex2.MyClass3"
+          c:myClass-ref="obj1"/>     
+    
+</beans>
+
+
+
+
+
+
+
+

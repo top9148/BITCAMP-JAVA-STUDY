@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 속성(attribute)
+- 시작 태그 안에 작성하는 데이터
+- 보통 부가적인 데이터를 표현할 때 사용한다.
+- 그러나 부가 데이터와 주 데이터의 경계가 모호하기 때문에
+  태그만 사용하여 작성할 수도 있고, 
+  속성만 사용하여 작성할 수도 있다.
+- 또는 태그와 속성을 혼합하여 작성할 수도 있다.
+- 그래서 XML 관련자들 사이에서는 속성이 필요한가?에 대한 이견이 많이 있다.
+- 하지만 명세서에 속성을 사용하는 문법이 추가되어 있기 때문에
+  논란은 무의미하다.
+- 결론!
+  작성자 마음대로 하라!
+- 문법
+  <태그명 속성명="값" 속성명='값' ...></태그명>
+ -->
+
+<books>
+    <!-- 태그만으로 책 정보 표현 -->
+    <book>
+        <title>오호라 이것이 자바다!</title>
+        <author>비트캠프</author>
+        <page>897</page>
+        <isbn>2342342k23k23</isbn>
+        <language>한국</language>
+        <press>비트출판사</press>
+        <description>자바 기초서. 짱이에요!</description>
+    </book>
+    
+    <!-- 속성 만으로 책 정보 표현 -->
+    <book 
+        title="오호라 이것이 자바다!" 
+        author="비트캠프"
+        page="897"
+        isbn="2342342k23k23"
+        language="한국"
+        press="비트출판사"
+        description="자바 기초서. 짱이에요!"/>
+        
+    <!-- 태그와 속성을 혼합하여 책 정보 표현 -->
+    <book isbn="2342342k23k23" language="한국">
+        <title>오호라 이것이 자바다!</title>
+        <author>비트캠프</author>
+        <page>897</page>
+        <press>비트출판사</press>
+        <description>자바 기초서. 짱이에요!</description>
+    </book>  
+</books>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

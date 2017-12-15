@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 엘리먼트 타입 - EMPTY
+<!ELEMENT 이름 EMPTY>
+- 내용이 없는 태그 
+ -->
+<!DOCTYPE books [
+<!ELEMENT books (book)*>
+<!ELEMENT book (title,author+,press,page,description?,photo*,cd?)>
+<!ELEMENT title (#PCDATA)>
+<!ELEMENT author (#PCDATA)>
+<!ELEMENT press (#PCDATA)>
+<!ELEMENT page (#PCDATA)>
+<!ELEMENT description (#PCDATA)>
+<!ELEMENT photo (#PCDATA)>
+<!ELEMENT cd EMPTY>
+]>
+<books>
+    <book>
+        <title>aaaa</title>
+        <author>bbbb</author>
+        <press>cccc</press>
+        <page>300</page>
+        <cd></cd>
+    </book>
+    <book>
+        <title>aaaa</title>
+        <author>bbbb</author>
+        <press>cccc</press>
+        <page>300</page>
+        <cd/>
+    </book>
+</books>
+
+
+
+
+
+

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- XML 설정 파일에 객체 생성 태그를 넣지 않고 대신에
+         각 클래스에 @Component를 붙인다.
+         => 대신 같은 타입의 객체를 다른 이름으로 여러 개 생성할 수 없다.
+         => 이 애노테이션이 붙은 클래스는 스프링 IoC 컨테이너에서 
+            객체를 자동 생성한다.
+         => 이 애노테이션을 처리할 객체를 Spring IoC 컨테이너에 등록하려면
+            <context:component-scan/> 태그를 붙여야 한다.
+         => <context:component-scan> 태그는 내부적으로 
+            <context:annotation-config> 태그의 기능을 포함하기 때문에
+            <context:annotation-config> 태그를 선언할 필요가 없다.
+         => 즉 <context:annotation-config> 태그를 통해 생성된 객체들이 
+            <context:component-scan> 태그를 통해서도 똑같이 생성되기 때문이다.
+            여기에 추가적으로 @Component 애노테이션 처리가 활성화된다.
+    -->
+    
+    <!-- base-package는 어느 패키지에 있는 @Component를 처리할 지 설정하는 것이다. -->
+    <context:component-scan base-package="bitcamp.java100.ch20.ex14"/>         
+    
+    
+</beans>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

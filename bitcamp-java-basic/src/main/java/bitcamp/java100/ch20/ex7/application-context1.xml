@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 빈의 생존 기간과 사용 범위
+        1) singleton(기본) 
+           => 한 개만 생성된다.
+           => getBean()을 여러 번 호출해도 같은 객체를 리턴한다.
+        2) prototype
+           => getBean()을 호출할 때마다 새로 생성한다.
+        3) request (웹 애플리케이션에서)
+           => 요청이 들어올 때마다 생성된다.
+        4) session (한 세션당 한 개)
+           => 세션이 만들어질 때 마다 생성된다.
+    -->
+    
+    <!-- 빈의 범위를 지정하지 않으면 기본이 singleton 이다. -->
+    <bean id="e1" class="bitcamp.java100.ch20.ex7.Engine">
+        <property name="name" value="비트엔진"/>
+        <property name="valve" value="16"/>
+        <property name="cc" value="1980"/>
+    </bean>
+    
+</beans>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 용어 -->
+
+<students>
+    <student>
+        <name> <!-- 시작 태그 -->
+            홍길동 <!-- 내용 -->
+        </name> <!--  끝 태그 -->
+    </student>
+    
+    
+</students>
+
+<!-- Well-formed XML 
+- XML 명세서에 정의된 규칙에 따라 작성한 XML 문서이다.
+ -->
+
+
+
+

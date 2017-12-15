@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 배열 주입하기 
+        Car c1 = new Car();
+        
+        Tire t1 = new Tire();
+        t1.setMaker("한국타이어");
+        Tire t2 = new Tire();
+        t2.setMaker("한국타이어");
+        Tire t3 = new Tire();
+        t3.setMaker("금호타이어");
+        Tire t4 = new Tire();
+        t4.setMaker("금호타이어");
+        
+        c1.setTires(new Tire[]{t1,t2,t3,t4});    
+    -->
+    <bean id="c1" class="bitcamp.java100.ch20.ex4.Car">
+        <property name="tires">
+          <array> <!-- 배열 객체를 생성한다. -->
+            <bean class="bitcamp.java100.ch20.ex4.Tire" p:maker="한국타이어"/>
+            <bean class="bitcamp.java100.ch20.ex4.Tire" p:maker="한국타이어"/>
+            <bean class="bitcamp.java100.ch20.ex4.Tire" p:maker="금호타이어"/>
+            <bean class="bitcamp.java100.ch20.ex4.Tire" p:maker="금호타이어"/>
+          </array>
+        </property>
+    </bean>
+    
+    <bean id="c2" class="bitcamp.java100.ch20.ex4.Car">
+        <property name="tires">
+          <list> <!-- 배열 객체를 생성한다. -->
+            <bean class="bitcamp.java100.ch20.ex4.Tire" p:maker="한국타이어"/>
+            <bean class="bitcamp.java100.ch20.ex4.Tire" p:maker="한국타이어"/>
+            <bean class="bitcamp.java100.ch20.ex4.Tire" p:maker="금호타이어"/>
+            <bean class="bitcamp.java100.ch20.ex4.Tire" p:maker="금호타이어"/>
+          </list>
+        </property>
+    </bean>
+    
+    <bean id="c3" class="bitcamp.java100.ch20.ex4.Car">
+        <property name="tires">
+          <set> <!-- 배열 객체를 생성한다. -->
+            <bean class="bitcamp.java100.ch20.ex4.Tire" p:maker="한국타이어"/>
+            <bean class="bitcamp.java100.ch20.ex4.Tire" p:maker="한국타이어"/>
+            <bean class="bitcamp.java100.ch20.ex4.Tire" p:maker="금호타이어"/>
+            <bean class="bitcamp.java100.ch20.ex4.Tire" p:maker="금호타이어"/>
+          </set>
+        </property>
+    </bean>
+    
+</beans>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

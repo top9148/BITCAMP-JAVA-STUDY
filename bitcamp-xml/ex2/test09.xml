@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 엘리먼트 나열 - 여러 개 중에 한 개의 엘리먼트 선택
+<!ELEMENT 이름 (태그1 | 태그2 | 태그3)>
+- 내용이 없는 태그 
+ -->
+<!DOCTYPE books [
+<!ELEMENT books (book)*>
+<!ELEMENT book (title,author+,press,page,description?,photo*,(cd|tape|usb)?)>
+<!ELEMENT title (#PCDATA)>
+<!ELEMENT author (#PCDATA)>
+<!ELEMENT press (#PCDATA)>
+<!ELEMENT page (#PCDATA)>
+<!ELEMENT description (#PCDATA)>
+<!ELEMENT photo (#PCDATA)>
+<!ELEMENT cd EMPTY>
+<!ELEMENT tape EMPTY>
+<!ELEMENT usb EMPTY>
+]>
+<books>
+    <book>
+        <title>aaaa</title>
+        <author>bbbb</author>
+        <press>cccc</press>
+        <page>300</page>
+    </book>
+    <book>
+        <title>aaaa</title>
+        <author>bbbb</author>
+        <press>cccc</press>
+        <page>300</page>
+        <cd/>
+    </book>
+    <book>
+        <title>aaaa</title>
+        <author>bbbb</author>
+        <press>cccc</press>
+        <page>300</page>
+        <tape/>
+    </book>
+    <book>
+        <title>aaaa</title>
+        <author>bbbb</author>
+        <press>cccc</press>
+        <page>300</page>
+        <usb/>
+    </book>
+    <book>
+        <title>aaaa</title>
+        <author>bbbb</author>
+        <press>cccc</press>
+        <page>300</page>
+        <usb/>
+    </book>
+</books>
+
+
+
+
+
+

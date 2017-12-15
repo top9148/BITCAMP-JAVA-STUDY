@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 엘리먼트 규칙 정의
+<!ELEMENT 이름 타입>
+ -->
+<!DOCTYPE books [
+<!ELEMENT books (#PCDATA)>
+]>
+<books></books>
+
+
+
+
+
+
+
+
+
+
+
+

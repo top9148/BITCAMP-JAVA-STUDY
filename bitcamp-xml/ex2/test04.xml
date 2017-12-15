@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 엘리먼트 타입 - 자식 태그
+<!ELEMENT 이름 (자식태그명)>
+ -->
+<!DOCTYPE books [
+<!ELEMENT books (book)>
+<!ELEMENT book (#PCDATA)>
+]>
+<books><book>aaa</book></books>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 엘리먼트의 속성 - 속성(attribute) 정의
+<!ATTLIST 태그명 
+    속성명 타입 옵션 
+    속성명 타입 옵션>
+ -->
+<!DOCTYPE items [
+<!ELEMENT items (book)*>
+<!ELEMENT book (#PCDATA)>
+<!ATTLIST book
+    title CDATA #REQUIRED
+>
+]>
+<items>
+    <book title="aaaa">
+        이 책은 인생에 관한 내용을 담고 있다.
+    </book>
+</items>
+
+
+
+
+
+

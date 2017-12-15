@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 태그는 시작 태그와 끝 태그가 항상 짝을 이뤄야 한다. -->
+
+<students>
+    <student></student>
+    
+    <!-- 끝 태그를 생략하려면 시작 태그에 생략했음을 표시해야 한다. -->
+    <student/>
+    
+</students>

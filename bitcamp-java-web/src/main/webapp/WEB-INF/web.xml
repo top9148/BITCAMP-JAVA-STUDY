@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+                      http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+  version="3.1"
+  metadata-complete="false">
+
+  <!-- 애노테이션으로도 배치정보를 설정할 수 있게 하려면 
+       위의 metadata-complete 속성의 값을 "false"로 설정해야 한다. -->
+
+    <!-- 리스너를 포함하여 서블릿, 필터 등 모든 웹 애플리케이션 멤버들이 
+         사용할 수 있는 값은 컨텍스트 파라미터로 선언한다. -->
+    <context-param>
+        <param-name>driver</param-name>
+        <param-value>com.mysql.jdbc.Driver</param-value>
+    </context-param>
+    <context-param> 
+        <param-name>url</param-name>
+        <param-value>jdbc:mysql://localhost:3306/studydb</param-value>
+    </context-param>
+
+    <!-- 배치할 리스너 정보를 등록한다. -->
+    <listener>
+        <listener-class>step3.Listener02</listener-class>
+    </listener>
+
+    <listener>
+        <listener-class>step6.Listener01</listener-class>
+    </listener>
+
+
+
+    <!-- 배치할 필터 정보를 등록한다. -->
+    <filter>
+        <filter-name>Filter02</filter-name>
+        <filter-class>step3.Filter02</filter-class>
+    </filter>
+    
+    <!-- 언제 필터를 실행해야 하는 지 URL을 설정한다. -->
+    <filter-mapping>
+        <filter-name>Filter02</filter-name>
+        <url-pattern>/step3/*</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>step6.Filter01</filter-name>
+        <filter-class>step6.Filter01</filter-class>
+        <init-param>
+            <param-name>charset</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>step6.Filter01</filter-name>
+        <url-pattern>/step6/*</url-pattern>
+    </filter-mapping>
+    
+    <!-- 배치할 서블릿 정보를 등록한다. -->
+    <servlet>
+        <!-- 서블릿 이름은 마음대로 작성해도 된다.
+             다만 유지보수할 때 해당 클래스를 쉽게 찾을 수 있도록
+             의미가 통하는 이름으로 작성하라! -->
+        <servlet-name>Servlet03</servlet-name>
+        
+        <!-- 패키지 이름을 포함한 FQName 으로 서블릿 클래스명을 설정해야 한다. -->
+        <servlet-class>step1.Servlet03</servlet-class>
+    </servlet>
+    
+
+    <!-- 서블릿과 URL을 연결해야 한다.
+         그래야 클라이언트에서 해당 URL로 요청을 할 것이다.
+     -->
+    <servlet-mapping>
+        <!-- 위에서 지정한 서블릿 이름 -->
+        <servlet-name>Servlet03</servlet-name>
+        
+        <!-- 클라이언트에서 요청할 때 사용할 URL -->
+        <url-pattern>/step1/Servlet03</url-pattern>
+    </servlet-mapping>  
+    
+    <servlet>
+        <servlet-name>step6.Servlet01</servlet-name>
+        <servlet-class>step6.Servlet01</servlet-class>
+        <init-param> <!-- 서블릿이 사용할 값을 설정하는 태그 -->
+            <!-- 이 값은 오직 이 설블릿만 사용할 수 있다. -->
+            <param-name>driver</param-name>
+            <param-value>com.mysql.jdbc.Driver</param-value>
+        </init-param>
+        <init-param> 
+            <param-name>url</param-name>
+            <param-value>jdbc:mysql://localhost:3306/studydb</param-value>
+        </init-param>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>step6.Servlet01</servlet-name>
+        <url-pattern>/step6/Servlet01</url-pattern>
+    </servlet-mapping> 
+      
+</web-app>
+
+
+
+
+
+
+
+
+
+

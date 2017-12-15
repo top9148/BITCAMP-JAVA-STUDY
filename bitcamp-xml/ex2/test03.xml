@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 엘리먼트 타입 - 문자열
+<!ELEMENT 이름 (#PCDATA)>
+ -->
+<!DOCTYPE books [
+<!ELEMENT books (#PCDATA)>
+]>
+<books>텍스트만 올 수 있다.</books>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 부모 태그와 자식 태그 -->
+
+<students> <!-- student 입장에서는 students가 부모(parent) 태그이다 -->
+    <student> <!-- students 입장에서는 student가 자식(child) 태그이다. -->
+    
+        <!-- student 입장에서는 name, age가 자식 태그이다.
+             stduents 입장에서는 student, name, age를 통칭하여 
+             자손(descendant) 태그라 부른다. -->
+        <!-- name 입장에서는 student, students를 통칭하여
+             조상(ascendant) 태그라 부른다.-->
+        <!-- name입장에서는 age를 자매형제(sibling) 태그라 부른다. -->
+        <name>홍길동</name> 
+        <age>20</age>
+    </student>
+</students>

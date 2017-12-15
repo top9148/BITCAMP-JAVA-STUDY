@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 셋터 호출 III - 레퍼런스 프로퍼티 -->
+    <bean id="e1" class="bitcamp.java100.ch20.ex3.Engine"
+          p:name="비트엔진" p:cc="5000" p:valve="16"/>
+          
+    <!-- <ref> 태그를 사용하여 셋터에게 객체를 넘기기 -->
+    <bean id="c1" class="bitcamp.java100.ch20.ex3.Car">
+        <property name="engine"><ref bean="e1"/></property>
+    </bean>
+    
+    <!-- ref 속성을 사용하여 셋터에게 객체를 넘기기 -->
+    <bean id="c2" class="bitcamp.java100.ch20.ex3.Car">
+        <property name="engine" ref="e1"/>
+    </bean>
+    
+    <!-- bean의 p네임스페이스를 사용하여 셋터 메서드 호출하기
+        
+         p:프로퍼티명-ref="객체주소"
+    -->
+    <bean id="c3" class="bitcamp.java100.ch20.ex3.Car"
+          p:engine-ref="e1"/>
+
+</beans>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

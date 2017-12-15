@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- String과 자바 원시 타입(primitive type)인 경우
+         문자열을 자동으로 해당 타입으로 변환해준다.
+         
+         그러나 그 외의 모든 타입은 자동으로 변환해주지 않는다.
+         따라서 다음과 같이 문자열을 java.sql.Date 객체로 변환해주지
+         않기 때문에 객체 생성 시 오류 발생!    
+    -->
+    <bean id="c1" class="bitcamp.java100.ch20.ex5.MyClass">
+        <property name="varDate" value="2017-12-4"/>
+    </bean>
+    
+</beans>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

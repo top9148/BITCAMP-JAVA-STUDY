@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>파일업로드</title>
+</head>
+<body>
+<h1>파일업로드 II</h1>
+<p>
+멀티 파트 전송 방식을 사용하여 파일을 서버에 업로드 하기.
+form 태그의 enctype 속성의 값을 "multipart/form-data"로 변경하라!
+원래 기본 값은 "application/x-www-form-urlencoded" 이다. 
+즉 서버에 보낼 값을 "변수=값&변수=값&..." 형식으로 가공한다. 
+</p>
+
+<p>멀티 파트 전송 방식은 다르다. 프록시 서버나 웹브라우저의 개발 모니터링 
+도구를 사용하여 확인하라!</p>
+ 
+<form action="Servlet08" method="POST" 
+      enctype="multipart/form-data">
+이름: <input type="text" name="name"><br>
+나이: <input type="text" name="age"><br>
+사진1: <input type="file" name="photo1"><br>
+사진2: <input type="file" name="photo2"><br>
+<button>전송</button>
+</form>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

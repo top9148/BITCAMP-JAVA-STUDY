@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 엘리먼트 타입 - 여러 개의 자식 태그 + 수량
+<!ELEMENT 이름 (자식태그명*, 자식태그명?, 자식태그명+ ...)>
+- 자식 태그를 나열할 때는 순서를 지켜야 한다.
+ -->
+<!DOCTYPE books [
+<!ELEMENT books (book)*>
+<!ELEMENT book (title,author+,press,page,description?,photo*)>
+<!ELEMENT title (#PCDATA)>
+<!ELEMENT author (#PCDATA)>
+<!ELEMENT press (#PCDATA)>
+<!ELEMENT page (#PCDATA)>
+<!ELEMENT description (#PCDATA)>
+<!ELEMENT photo (#PCDATA)>
+]>
+<books>
+    <book>
+        <title>aaaa</title>
+        <author>bbbb</author>
+        <press>cccc</press>
+        <page>300</page>
+    </book>
+    <book>
+        <title>aaaa</title>
+        <author>bbbb</author>
+        <author>okok</author>
+        <press>cccc</press>
+        <page>200</page>
+        <description>okokok</description>
+    </book>
+    <book>
+        <title>aaaa</title>
+        <author>bbbb</author>
+        <author>okok</author>
+        <press>cccc</press>
+        <page>200</page>
+        <photo>a1.gif</photo>
+        <photo>a2.gif</photo>
+    </book>
+</books>

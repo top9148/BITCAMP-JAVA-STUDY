@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- @Qualifier 애노테이션으로 주입할 객체를 선택하기 
+         @Qualifier를 사용하지 않았을 때,
+         같은 타입의 객체가 여러 개 있으면 스프링 IoC 컨테이너가 
+         어떤 객체를 주입할 지 결정할 수 없기 때문에 오류를 발생시킨다. 
+    -->
+     
+    <bean id="e1" class="bitcamp.java100.ch20.ex11.Engine">
+        <property name="name" value="비트엔진"/>
+        <property name="valve" value="16"/>
+        <property name="cc" value="1980"/>
+    </bean>
+    
+    <bean id="e2" class="bitcamp.java100.ch20.ex11.Engine">
+        <property name="name" value="볼보엔진"/>
+        <property name="valve" value="32"/>
+        <property name="cc" value="5000"/>
+    </bean>
+    
+    <!-- 주입할 객체가 여러 개 있을 경우 어떤 객체를 주입해야 할 지 
+         선택할 수 없어 오류가 발생한다!
+         해결책?
+         setEngine() 메서드에 @Qualifier를 붙여 
+         어떤 엔진을 장착할지 지정해야 한다.
+         => @Qualifier를 붙였는데도 계속 엔진이 두 개라며 오류가 발생시킨다면,
+            이유는? @Qualifier 애노테이션을 처리할 객체를 
+            스프링 IoC 컨테이너에 등록되지 않았기 때문이다.
+         => @Qualifier를 처리할 클래스의 이름은?
+            - 이런식으로 애노테이션을 한 개씩 사용할 때마다.
+              그 애노테이션을 찾아 XML 설정파일에 등록해야 한다면,
+              개발자들은 매우 피곤할 것이다.
+            - 이런 번거로움을 해결해주기 위해 스프링 프레임워크에서는
+              이렇게 객체를 생성하는 애노테이션을 처리하는 클래스를 
+              한 번에 등록할 수 있도록 아주 특별한 단축 태그를 제공한다.
+              그 태그의 이름은?
+              <annotation-config/>
+            - 단 이 태그는 context 네임스페이스에 정의되어 있다.
+              따라서 먼저 context 네임스페이스를 <beans> 태그에 선언하라!
+             -->
+    
+    <!-- 다음 태그를 선언하는 순간 일반적으로 많이 사용하는 
+         애노테이션들을 처리하는 클래스들이 자동으로 등록된다.
+         따라서 위에서 선언한 AutowiredAnnotationBeanPostProcessor 선언은
+         제거해도 된다. -->         
+    <context:annotation-config/>         
+             
+    <bean id="c1" class="bitcamp.java100.ch20.ex11.Car">
+        <property name="model" value="티코"/>
+        <property name="color" value="빨강"/>
+    </bean>
+    
+</beans>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

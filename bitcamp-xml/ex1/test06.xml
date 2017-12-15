@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 태그 이름 -->
+
+<students> 
+    <!-- <, </ 와 태그명 사이에 공백이 올 수 없다. -->
+    <student></student> 
+    
+    <!-- 오류 예) 
+    < student></student>
+    <student></ student>
+    -->
+    
+    <!-- 태그명과 > 사이에는 공백이 와도 된다. -->
+    <student ></student>
+    <student      ></student      >
+    
+    <student>
+        <!-- 태그명은 공백을 줄 수 없다. 보통 '-' 나 '_'를 사용한다.-->
+        <first-name></first-name>
+        <first_name></first_name>
+        
+        <!-- 오류 예)  -->
+        <!-- 
+        <first name></first name>
+        -->
+
+        <!-- XML은 대소문자를 구분한다. -->
+        <firstName></firstName>
+        
+        <!-- 오류 예) -->
+        <!--  
+        <firstName></FirstName>
+        -->
+        
+        <!-- 태그이름은 숫자나 '.', '-' 로 시작할 수 없다. -->
+        <_name></_name>
+        <last-name></last-name>
+        <last.name></last.name>
+        <name2></name2>
+        <name4you></name4you>
+        
+        <!-- 오류 예) -->
+        <!--  
+        <7name></7name>
+        <.name></.name>
+        <-name></-name>
+        -->
+    </student>
+</students>
+
+
+
+
+
+

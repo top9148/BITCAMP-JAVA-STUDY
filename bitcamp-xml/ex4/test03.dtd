@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 일반 엔티티
+- XML 문서에서 사용할 수 있는 상수 값
+- <!ENTITY 이름 "값">
+ -->
+
+<!ENTITY bitcamp "비트캠프@2017 02-1111-2222">
+
+<!ENTITY % string "CDATA #REQUIRED"> 
+ 
+<!ENTITY % coreattrs
+    "name %string;
+     id  ID #REQUIRED"
+>
+<!ELEMENT items (author*,press*,book*)>
+<!ELEMENT book (#PCDATA)>
+<!ATTLIST book
+    title %string;
+    author IDREFS #REQUIRED
+    press IDREF #REQUIRED
+>
+<!ELEMENT author (#PCDATA)>
+<!ATTLIST author
+    %coreattrs;
+>
+<!ELEMENT press (#PCDATA)>
+<!ATTLIST press
+    %coreattrs;
+>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,47 @@
+apply plugin: 'java'
+apply plugin: 'application'
+apply plugin: 'eclipse'
+
+eclipse {
+  jdt {
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+    javaRuntimeName = "JavaSE-1.8"
+    
+    /*
+    file {
+      whenMerged { jdt
+      }
+
+      // .settings/org.eclipse.jdt.core.prefs 파일에 들어갈 값 설정
+      withProperties { properties ->
+        properties["org.eclipse.jdt.core.compiler.codegen.targetPlatform"] = "9"
+        properties["org.eclipse.jdt.core.compiler.source"] = "9"
+        properties["org.eclipse.jdt.core.compiler.compliance"] = "9"
+      }
+    }
+    */
+  }
+}
+
+compileJava {
+    options.encoding = 'UTF-8'   
+}
+javadoc {
+    options.encoding = "UTF-8"
+}
+repositories {
+    jcenter()
+}
+dependencies {
+    // MySQL DBMS의 JDBC Driver
+    compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.44'
+    
+    // Spring IoC 컨테이너 라이브러리
+    compile 'org.springframework:spring-context:5.0.2.RELEASE'
+    
+    compile 'com.google.guava:guava:22.0'
+    testCompile 'junit:junit:4.12'
+}
+mainClassName = 'App'
+

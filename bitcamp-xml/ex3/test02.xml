@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 엘리먼트의 속성 - 필수(#REQUIRED), 선택(#IMPLIED), 고정(#FIXED), 기본 값 
+<!ATTLIST 태그명 
+    속성명 타입 #REQUIRED  
+    속성명 타입 #IMPLIED
+    속성명 타입 #FIXED>
+ -->
+<!DOCTYPE items [
+<!ELEMENT items (book)*>
+<!ELEMENT book (#PCDATA)>
+<!ATTLIST book
+    title CDATA #REQUIRED
+    press CDATA #IMPLIED
+    lang CDATA #FIXED '한국'
+    price CDATA '1000'
+>
+]>
+<items>
+    <book title="aaaa">title은 필수 속성이다.</book>
+    <book title="aaaa" press="bbbb">
+        press는 선택 속성이다. 그래서 생략해도 된다.
+    </book>
+    <book title="aaaa" press="bbbb" lang='한국'>
+        lang은 고정된 값을 갖는 속성이다.
+        생략하면 설정된 값이 기본으로 사용된다.
+        고정값이기 때문에 다른 값으로 변경할 수 없다.
+    </book>
+    <book title="aaaa" press="bbbb" lang='한국'>
+        price는 선택 속성이다. 기본 값이 설정되어 있기 때문에 
+        생략하면 그 값이 사용된다. 
+    </book>
+    <book title="aaaa" press="bbbb" lang='한국' price='30000'>
+        price는 FIXED가 아니기 때문에 다른 값으로 설정할 수 있다.
+    </book>
+</items>
+
+
+
+
+
+

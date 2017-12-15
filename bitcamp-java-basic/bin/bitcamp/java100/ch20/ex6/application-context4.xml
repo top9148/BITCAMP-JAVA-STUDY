@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- FactoryBean 규격에 따라 동작하는 팩토리 메서드를 호출 II -->
+    
+    <!-- Spring IoC 컨테이너는 class 속성에 지정된 클래스를 조사한다.
+         만약 그 클래스가 FactoryBean 규격을 준수하는 객체라면,
+         객체를 만들어주는 공장 객체로 간주한다.
+         따라서 "c1"이라는 이름으로 저장되는 것은 
+         CarFactoryBean이 아니라 CarFactorBean의 
+         getObject() 메서드가 리턴한 값이다.
+         실제는 getObject()는 createInstance()를 호출하고 
+         createInstance()가 객체를 만든다.
+         그리고 getObject()는 createInstance()가 만든 객체를 리턴한다.
+    -->    
+    <bean id="c1" class="bitcamp.java100.ch20.ex6.CarFactoryBean">
+      <property name="tires">
+          <array>
+              <bean class="bitcamp.java100.ch20.ex6.Tire" p:maker="한국타이어"/>
+              <bean class="bitcamp.java100.ch20.ex6.Tire" p:maker="한국타이어"/>
+              <bean class="bitcamp.java100.ch20.ex6.Tire" p:maker="금호타이어"/>
+              <bean class="bitcamp.java100.ch20.ex6.Tire" p:maker="금호타이어"/>
+          </array>
+        </property>
+        <property name="model" value="티코 골드"/>
+    </bean>
+    
+    <bean id="c2" class="bitcamp.java100.ch20.ex6.CarFactoryBean">
+        <property name="model" value="에쿠스"/>
+    </bean>
+    
+    <bean id="c3" class="bitcamp.java100.ch20.ex6.CarFactoryBean">
+        <property name="model" value="소나타"/>
+    </bean>
+    
+</beans>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

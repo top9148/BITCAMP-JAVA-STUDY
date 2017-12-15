@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 값을 주입하는 원리 
+        XML에 설정한 값은 문자열이다.
+        따라서 셋터에 주입할 때는 문자열을 셋터가 원하는 
+        파라미터 타입으로 자동으로 변환하여 주입한다.    
+    -->
+    <bean id="c1" class="bitcamp.java100.ch20.ex5.MyClass">
+        <property name="varString" value="문자열"/>
+        <property name="varByte" value="100"/>
+        <property name="varShort" value="200"/>
+        <property name="varInt" value="300"/>
+        <property name="varLong" value="400"/>
+        <property name="varFloat" value="3.14"/>
+        <property name="varDouble" value="3.141592"/>
+        <property name="varBoolean" value="true"/>
+        <property name="varChar" value="헐"/>
+    </bean>
+    
+</beans>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

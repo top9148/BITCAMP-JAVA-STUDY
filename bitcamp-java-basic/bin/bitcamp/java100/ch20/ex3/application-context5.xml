@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 셋터를 호출할 때 객체 생성하기 
+         <property> 태그 안에 <bean> 태그 작성하기
+         
+         Car c1 = new Car();
+         Engine temp = new Engine();
+         temp.setName("비트엔진");
+         temp.setCc(5000);
+         temp.setValve(16); 
+         c1.setEngine(temp);
+         
+         Car c2 = new Car();
+         Engine temp = new Engine();
+         temp.setName("비트엔진2");
+         temp.setCc(6000);
+         temp.setValve(32); 
+         c2.setEngine(temp);
+    -->
+          
+    <bean id="c1" class="bitcamp.java100.ch20.ex3.Car">
+        <property name="engine">
+            <bean class="bitcamp.java100.ch20.ex3.Engine"
+                    p:name="비트엔진" p:cc="5000" p:valve="16"/>
+        </property>
+    </bean>
+    
+    <bean id="c2" class="bitcamp.java100.ch20.ex3.Car">
+        <property name="engine">
+            <bean class="bitcamp.java100.ch20.ex3.Engine"
+                    p:name="비트엔진2" p:cc="6000" p:valve="32"/>
+        </property>
+    </bean>
+    
+</beans>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

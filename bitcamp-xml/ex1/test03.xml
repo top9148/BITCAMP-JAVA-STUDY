@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 루트 태그(root tag)
+- 가장 바깥쪽에 있는 태그를 루트 태그라 한다.
+- 루트 태그는 XML 파일 당 한 개만 가능하다.
+-->
+
+<students>
+
+</students>
+
+<!-- 다음과 같이 루트 태그를 또 적으면 오류이다! -->
+<teachers>
+
+</teachers>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 셋터 호출 
+    
+        Engine e1 = new Engine();
+        e1.setName("비트엔진");
+        e1.setCc(3000);
+        e1.setValve(16);
+    -->
+    <bean id="e1" class="bitcamp.java100.ch20.ex3.Engine">
+        
+        <!-- name: 프로퍼티명 = 셋터메서드명 - set + 첫 알파벳을 소문자로 변환 -->
+        <property name="name"><value>비트엔진</value></property>
+        <property name="cc"><value>3000</value></property>
+        <property name="valve"><value>16</value></property>
+    </bean>
+    
+    <bean id="e2" class="bitcamp.java100.ch20.ex3.Engine">
+        <property name="name" value="비트엔진"/>
+        <property name="cc" value="3000"/>
+        <property name="valve" value="16"/>
+    </bean>
+
+</beans>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

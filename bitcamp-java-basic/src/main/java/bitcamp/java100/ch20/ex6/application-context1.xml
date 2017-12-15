@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 스태틱 팩토리 메서드를 호출하여 객체 생성하기   
+         class="공장메서드를 갖고 있는 클래스명"
+         factory-method="스태틱으로 선언된 공장메서드 이름"
+         id="공장 메서드가 리턴한 값을 저장할 때 사용할 이름"
+         
+         => 스프링 IoC 컨테이너에 저장되는 객체는 CarFactory가 아니라, 
+            CarFactory.createCar() 메서드가 리턴한 값이다.
+    -->
+    <bean id="c1" class="bitcamp.java100.ch20.ex6.CarFactory"
+          factory-method="createCar">
+          <!-- createCar() 메서드에 파라미터 값을 넘겨주는 방법은  
+               생성자에 파라미터 값을 넘겨주는 방법과 같다.-->
+          <constructor-arg value="티코 골드"/>
+    </bean>
+    
+    <bean id="c2" class="bitcamp.java100.ch20.ex6.CarFactory"
+          factory-method="createCar">
+          <constructor-arg value="에쿠스"/>
+    </bean>
+    
+    <bean id="c3" class="bitcamp.java100.ch20.ex6.CarFactory"
+          factory-method="createCar">
+          <constructor-arg value="소나타"/>
+    </bean>
+    
+</beans>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

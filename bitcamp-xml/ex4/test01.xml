@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 외부 DTD 파일 생성 및 사용
+    <!DOCTYPE 루트태그 SYSTEM "URI">
+- DTD를 외부에 별도의 파일로 정의하면,
+  여러 XML 문서에서 참조할 수 있기 때문에 유지보수에 좋다.
+  
+  
+DOCTYPE 문법:
+<!DOCTYPE 루트태그 PUBLIC "DTD 정보" "URI">
+<!DOCTYPE 루트태그 SYSTEM "URI">
+
+DTD 정보:
+"국제공인여부//DTD 유지보수 조직//DTD 이름//언어"
+
+국제공인여부:
++(국제공인), -(비공인단체)
+
+예:
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+            "http://www.w3.org/TR/html4/loose.dtd">
+ -->
+<!DOCTYPE items SYSTEM "test01.dtd">
+<items>
+    <author id="a001" name="홍길동"/>
+    <author id="a002" name="임꺽정"/>
+    <author id="a003" name="유관순"/>
+    
+    <press id="p001" name="비트출판사"/>
+    <press id="p002" name="위키북스"/>
+    <press id="p003" name="프리렉"/>
+    
+    <book title="aaaa" press="p001" author="a003">
+        press는 기존의 ID값을 지정하는 속성이다.
+        존재하는 ID값을 지정해야 한다.
+        author 또한 존재하는 ID 값을 지정하는 속성이다. 
+    </book>
+    
+    <book title="aaaa" press="p001" author="a003 a002 a001">
+        press는 오직 한 개의 ID 값만 참조할 수 있지만,
+        author는 여러 개의 ID 값을 참조할 수 있다. 공백으로 구분한다.
+    </book>
+    
+    
+</items>
+
+
+
+
+
+

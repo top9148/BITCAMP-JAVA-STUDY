@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 생성자 호출 -->
+    
+    <!-- 기본 생성자 호출하기 
+        Object obj = new MyClass();
+    -->
+    <bean class="bitcamp.java100.ch20.ex2.MyClass"/>
+    
+    <!-- 파라미터가 있는 생성자 호출하기 
+        생성자의 파라미터 타입이 지정되지 않으면 
+        String 타입의 파라미터 값을 받는 생성자부터 찾는다.
+        
+        Object obj = new MyClass("홍길동");
+    -->
+    <bean class="bitcamp.java100.ch20.ex2.MyClass">
+        <constructor-arg><value>홍길동</value></constructor-arg>
+    </bean>
+    
+    <!-- 그래서 다음 설정도 String을 받는 생성자를 호출한다.-->
+    <bean class="bitcamp.java100.ch20.ex2.MyClass">
+        <constructor-arg><value>100</value></constructor-arg>
+    </bean>
+    
+    <!-- 이런 이유로 가능한 어느 타입의 파라미터를 갖는 생성자를 
+         호출할 것인지 명시하는 것이 유지보수에 좋다. -->
+    <bean class="bitcamp.java100.ch20.ex2.MyClass">
+        <constructor-arg type="int"><value>100</value></constructor-arg>
+    </bean>
+    
+    <!-- 여러 개의 파라미터를 지정할 때 
+         파라미터의 타입으로도 정확하게 지정하지 못할 수가 있다.
+         괜히 스프링의 호출 규칙을 이해하려 하지 말고,
+         그냥 파라미터의 순서까지 지정하라! -->
+    <bean class="bitcamp.java100.ch20.ex2.MyClass">
+        <constructor-arg type="java.lang.String" index="0"><value>1</value></constructor-arg>
+        <constructor-arg type="int" index="1"><value>100</value></constructor-arg>
+    </bean>
+    
+    <!-- 참고) 자바 기본 패키지(java.lang)의 클래스는 
+               패키지명을 지정하지 않아도 된다. 
+               그래도 다 적어라!-->
+    <bean class="bitcamp.java100.ch20.ex2.MyClass">
+        <constructor-arg type="int" index="0"><value>100</value></constructor-arg>
+        <constructor-arg type="String" index="1"><value>1</value></constructor-arg>
+    </bean>
+    
+    <!-- 파라미터의 값이 길지 않고 단순 문자열이나 숫자라면 
+         value 태그를 사용하는 대신에 contructor-arg의 value 속성을 사용하라! 
+         
+         Object obj = new MyClass(100, "홍길동");
+    -->
+    <bean class="bitcamp.java100.ch20.ex2.MyClass">
+        <constructor-arg type="int" index="0" value="100"/>
+        <constructor-arg type="String" index="1" value="홍길동"/>
+    </bean>
+</beans>
+
+
+
+
+
+
+
+

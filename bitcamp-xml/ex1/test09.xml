@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- CDATA 섹션
+- XML 파서가 문자열로 취급하는 데이터
+- 데이터 중에 XML 파서에게 특정 의미를 부여하는 내용일 있을 경우에 사용한다.
+- XML 파서는 CDATA 섹션에 있는 데이터에 대해 분석을 포기한다.
+- 그냥 문자열로 취급한다.
+ -->
+
+<tests>
+    <!-- 다음 태그의 내용 중에 '<' 문자가 있다. 
+         '<' 문자는 태그의 시작을 의미하기 때문에 
+         XML 파서(parser;해석기)는 태그로 간주하고 문법을 검사한다.-->
+    <!-- 또는 내용 중에 '&' 문자가 있는데,
+         이 또한 XML에서 특수한 의미로 사용된다. 
+         즉 상수 값을 가리키는 용도로 사용된다. -->
+    <!--  
+    <question no="1">
+        다음 코드의 실행 결과는?
+        int a = 20;
+        if (a < 14) 
+          System.out.println("어린이");
+        else if (a >= 14 && a < 19) 
+          System.out.println("청소년");
+    </question>
+    -->
+    
+    <!-- 위 문제를 해결하기 위해 CDATA 섹션이 필요한 것이다. 
+         CDATA 섹션 안에 작성한 내용은 XML 파서가 분석하지 않는다.
+         그냥 단순 텍스트로 취급한다.
+    -->
+    <question no="1">
+    <![CDATA[
+        다음 코드의 실행 결과는?
+        int a = 20;
+        if (a < 14) 
+          System.out.println("어린이");
+        else if (a >= 14 && a < 19) 
+          System.out.println("청소년");
+    ]]>
+    </question>
+    
+    <!-- SQL 문을 XML 파일에 작성할 때 특히 CDATA 섹션이 필요하다. 
+         SQL 문에서 비교 연산자(<,<=,>,>=)를 사용하거나 
+         논리 연산자(&,|)를 사용할 경우가 많기 때문이다.-->
+    <!-- 즉 다음과 같이 태그 내용 중에 <를 포함할 경우가 많다.
+    <select>
+        select no, name from student where age > 13 and age < 19
+    </select>
+    -->
+    
+    <select>
+    <![CDATA[
+        select no, name from student where age > 13 and age < 19
+    ]]>
+    </select>
+    
+</tests>
+
+
+
+
+

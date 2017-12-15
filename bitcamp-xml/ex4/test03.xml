@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 일반 엔티티가 적용된 DTD 사용 
+    &엔티티명;
+-->
+<!DOCTYPE items SYSTEM "test03.dtd" [
+<!ENTITY bitcamp2 "비트캠프@2017 02-1111-2222">
+]>
+<items>
+    <author id="a001" name="홍길동"/>
+    <author id="a002" name="임꺽정"/>
+    <author id="a003" name="유관순"/>
+    
+    <press id="p001" name="비트출판사"/>
+    <press id="p002" name="위키북스"/>
+    <press id="p003" name="프리렉"/>
+    
+    <book title="aaaa" press="p001" author="a003">
+        이 책은 &bitcamp2; 에서 제공합니다.
+    </book>
+    
+</items>
+
+
+
+
+
+

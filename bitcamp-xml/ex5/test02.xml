@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 기본 네임스페이스
+- 별명을 부여하지 않는다.
+
+네임스페이스 정의 문법
+  <태그명 xmlns="네임스페이스명">
+
+네임스페이스 사용 문법
+- 태그명
+- 속성명
+
+-->
+<books xmlns="http://bitcamp.co.kr/java100/books"
+         xmlns:a="http://bitcamp.co.kr/java100/author"
+         xmlns:p="http://bitcamp.co.kr/java100/press">
+         
+    <a:author a:id="a001" a:name="홍길동"/>
+    <a:author a:id="a002" a:name="임꺽정"/>
+    <a:author a:id="a003" a:name="유관순"/>
+    
+    <p:press p:id="p001" name="비트출판사"/>
+    <p:press p:id="p002" name="위키북스"/>
+    <p:press p:id="p003" name="프리렉"/>
+    
+    <book name="aaaa" press="p001" author="a003"/>
+    
+</books>
+
+
+
+
+
+

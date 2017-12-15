@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- String을 특정 타입으로 자동 변환하기
+         1) 프로퍼티의 값 변환기(MyDateEditor 클래스) 생성
+         2) 변환기 클래스를 스프링 프로퍼티 변환기 목록에 등록한다.   
+    -->
+    <bean id="c1" class="bitcamp.java100.ch20.ex5.MyClass">
+        <property name="varDate" value="2017-12-4"/>
+    </bean>
+    
+    <!-- 위에서 만든 변환기를 스프링 변환기 목록에 추가한다. -->
+    <bean class="org.springframework.beans.factory.config.CustomEditorConfigurer">
+        <property name="customEditors">
+          <map>
+            <!-- key => 문자열을 어떤 타입의 객체로 바꿀지 지정
+                 value => 문자열을 해당 타입의 객체로 바꿔는 변환기 지정           
+            -->
+            <entry key="java.sql.Date" 
+                   value="bitcamp.java100.ch20.ex5.MyDateEditor"/>
+          </map>
+        </property>
+    </bean>
+    
+</beans>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

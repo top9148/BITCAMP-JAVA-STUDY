@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 엘리먼트의 속성 타입 - 문자(CDATA), 열거형, ID 
+<!ATTLIST 태그명 
+    속성명 CDATA #REQUIRED  
+    속성명 (aaa|bbb|ccc) #REQUIRED
+    속성명 ID #REQUIRED
+>
+ -->
+<!DOCTYPE items [
+<!ELEMENT items (book|author)*>
+<!ELEMENT book (#PCDATA)>
+<!ATTLIST book
+    title CDATA #REQUIRED
+    burok (cd|usb|tape) #IMPLIED
+    isbn ID #REQUIRED
+>
+<!ELEMENT author (#PCDATA)>
+<!ATTLIST author
+    name CDATA #REQUIRED
+    uid  ID #REQUIRED
+>
+]>
+<items>
+    <book title="aaaa" isbn='b001'>title과 isbn은 필수 속성이다.</book>
+    <book title="aaaa" isbn='b002'>
+        isbn은 ID 타입이기 때문에 문서 내에서 중복 값을 가질 수 없다.
+    </book>
+    <author name="aaaa" uid="a001">
+        ID 타입의 속성은 태그명이나 속성명에 상관없이 
+        이 파일 안에서 같은 ID를 사용할 수 없다.
+    </author>
+    <author name="aaaa" uid="a002.aa-ok">
+        ID 타입의 속성값은 태그 이름 짓는 규칙에 따라야 한다.
+        즉 숫자로 시작할 수 없고,
+        공백을 포함해서는 안되고, 
+        반드시 문자나 _로 시작해야 한다.
+        물론 중간에 숫자나 ., -를 포함할 수 있다.
+    </author>
+</items>
+
+
+
+
+
+
