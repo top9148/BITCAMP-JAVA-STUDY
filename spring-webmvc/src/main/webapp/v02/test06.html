@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<p>HTTP 요청할 때 "aaa" 헤더를 추가한다.
+<button type="button" onclick="f1()">요청1</button></p>
+
+<p>HTTP 요청할 때 "bbb" 헤더를 추가한다.
+<button type="button" onclick="f2()">요청2</button></p>
+
+<p>HTTP 요청할 때 "aaa"와 "bbb" 헤더를 추가한다.
+<button type="button" onclick="f3()">요청3</button></p>
+
+<p>HTTP 요청할 때 따로 요청 헤더를 추가하지 않는다.
+<button type="button" onclick="f4()">요청4</button></p>
+
+<script>
+function f1() {
+	// 웹서버에게 HTTP 요청 보내기
+	var xhr = new XMLHttpRequest();
+	xhr.open('GET', '../app/v02/test06', false); //웹서버에 연결한다.
+	xhr.setRequestHeader("aaa", "ok");
+	xhr.send(); // 웹서버에 요청을 보낸다.
+	window.alert(xhr.responseText); // 웹서버가 응답한 내용을 출력한다.
+}
+
+function f2() {
+	// 웹서버에게 HTTP 요청 보내기
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', '../app/v02/test06', false); //웹서버에 연결한다.
+    xhr.setRequestHeader("bbb", "ok");
+    xhr.send(); // 웹서버에 요청을 보낸다.
+    window.alert(xhr.responseText); // 웹서버가 응답한 내용을 출력한다.
+}
+
+function f3() {
+	// 웹서버에게 HTTP 요청 보내기
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', '../app/v02/test06', false); //웹서버에 연결한다.
+    xhr.setRequestHeader("aaa", "ok");
+    xhr.setRequestHeader("bbb", "ok");
+    xhr.send(); // 웹서버에 요청을 보낸다.
+    window.alert(xhr.responseText); // 웹서버가 응답한 내용을 출력한다.
+}
+
+function f4() {
+	// 웹서버에게 HTTP 요청 보내기
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', '../app/v02/test06', false); //웹서버에 연결한다.
+    xhr.send(); // 웹서버에 요청을 보낸다.
+    window.alert(xhr.responseText); // 웹서버가 응답한 내용을 출력한다.
+}
+</script>
+
+
+
+
+
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+

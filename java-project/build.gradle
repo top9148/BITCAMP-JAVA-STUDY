@@ -1,0 +1,71 @@
+apply plugin: 'java'
+apply plugin: 'eclipse-wtp'
+apply plugin: 'war'
+
+eclipse {
+  jdt {
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+    javaRuntimeName = "JavaSE-1.8"
+
+    /*
+    file {
+      whenMerged { jdt
+      }
+
+      // .settings/org.eclipse.jdt.core.prefs 파일에 들어갈 값 설정
+      withProperties { properties ->
+        properties["org.eclipse.jdt.core.compiler.codegen.targetPlatform"] = "9"
+        properties["org.eclipse.jdt.core.compiler.source"] = "9"
+        properties["org.eclipse.jdt.core.compiler.compliance"] = "9"
+      }
+    }
+    */
+  }
+}
+
+compileJava {
+    options.encoding = 'UTF-8'   
+}
+javadoc {
+    options.encoding = "UTF-8"
+}
+repositories {
+    jcenter()
+}
+dependencies {
+    // MySQL DBMS의 JDBC Driver
+    compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.44'
+    
+    // Reflection 작업을 도와주는 라이브러리
+    compile group: 'org.reflections', name: 'reflections', version: '0.9.11'
+ 
+    // Spring IoC 컨테이너 라이브러리
+    // => Spring WebMVC를 추가하면 이 라이브러리는 자동으로 포함된다.
+    //compile 'org.springframework:spring-context:5.0.2.RELEASE'
+    
+    // Spring WebMVC 프레임워크
+    compile group: 'org.springframework', name: 'spring-webmvc', version: '5.0.2.RELEASE'
+    
+ 
+    // JavaEE의 Servlet 기술을 지원하는 라이브러리
+    // "provided" 선언된 라이브러리는 컴파일할 때 사용하고 배포할 때는 제외한다.
+    // 왜? 
+    // 프로그램을 배포하는 서블릿 컨테이너에 
+    // 이 라이브러리 파일이 내장되어 있기 때문에 또 배포할 필요가 없다.
+    providedCompile group: 'javax.servlet', name: 'javax.servlet-api', version: '3.1.0'
+    
+     // JTSL 태그 라이브러리
+    compile group: 'javax.servlet', name: 'jstl', version: '1.2'
+    
+    compile 'com.google.guava:guava:22.0'
+    testCompile 'junit:junit:4.12'
+}
+
+
+
+
+
+
+
+

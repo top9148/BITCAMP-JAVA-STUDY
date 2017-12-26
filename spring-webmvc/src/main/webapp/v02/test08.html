@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<p>웹서버에 text/csv 타입의 값을 요구한다.
+<button type="button" onclick="f1()">요청1</button></p>
+
+<p>웹서버에 application/json 타입의 값을 요구한다.
+<button type="button" onclick="f2()">요청2</button></p>
+
+<p>일반 콘텐츠 요청
+<button type="button" onclick="f3()">요청3</button></p>
+
+<script>
+function f1() {
+	var xhr = new XMLHttpRequest();
+	xhr.open('GET', '../app/v02/test08', false);
+	xhr.setRequestHeader("Accept", "text/csv");
+	xhr.send(); 
+	window.alert(xhr.responseText); 
+}
+
+function f2() {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', '../app/v02/test08', false);
+    xhr.setRequestHeader("Accept", "application/json");
+    xhr.send();
+    window.alert(xhr.responseText);
+}
+
+function f3() {
+	// 웹서버에게 HTTP 요청 보내기
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', '../app/v02/test08', false);
+    xhr.send();
+    window.alert(xhr.responseText);
+}
+</script>
+
+
+
+
+
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<p>웹서버에 text/csv 타입의 값을 보낼 경우
+<button type="button" onclick="f1()">요청1</button></p>
+
+<p>웹서버에 application/json 타입의 값을 보낼 경우
+<button type="button" onclick="f2()">요청2</button></p>
+
+<p>일반 POST 요청 보내기
+<button type="button" onclick="f3()">요청3</button></p>
+
+<p>웹서버에 순수 텍스트 보내기
+<button type="button" onclick="f4()">요청4</button></p>
+
+<script>
+function f1() {
+	var xhr = new XMLHttpRequest();
+	xhr.open('POST', '../app/v02/test07', false); //웹서버에 연결한다.
+	xhr.setRequestHeader("Content-Type", "text/csv");
+	xhr.send("aaa,20,111-1111,aaa@test.com"); // 웹서버에 POST 요청을 보낸다.
+	window.alert(xhr.responseText); // 웹서버가 응답한 내용을 출력한다.
+}
+
+function f2() {
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '../app/v02/test07', false); //웹서버에 연결한다.
+    xhr.setRequestHeader("Content-Type", "application/json");
+    
+    // 진짜 자바스크립트 객체를 생성한다.
+    var obj = {
+    	name: "aaa",
+    	age: 20,
+    	tel: "1111-1111",
+    	email: "aaa@test.com"
+    };
+    
+    // 자바스트립트 객체를 문자열로 바꾼다.
+    var str = JSON.stringify(obj);
+    
+    xhr.send(str);
+    //xhr.send("{\"name\":\"aaa\",\"age\":20,\"tel\":\"1111-1111\",\"email\":\"aaaa@test.com\"}"); // 웹서버에 요청을 보낸다.
+    
+    window.alert(xhr.responseText); // 웹서버가 응답한 내용을 출력한다.
+}
+
+function f3() {
+	// 웹서버에게 HTTP 요청 보내기
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '../app/v02/test07', false); //웹서버에 연결한다.
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.send("name=aaa&age=20&tel=111-1111&email=aaa@test.com"); // 웹서버에 요청을 보낸다.
+    window.alert(xhr.responseText); // 웹서버가 응답한 내용을 출력한다.
+}
+
+function f4() {
+	// 웹서버에게 HTTP 요청 보내기
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '../app/v02/test07', false); //웹서버에 연결한다.
+    xhr.setRequestHeader("Content-Type", "text/plain");
+    xhr.send("hello!"); // 웹서버에 요청을 보낸다.
+    window.alert(xhr.responseText); // 웹서버가 응답한 내용을 출력한다.
+}
+</script>
+
+
+
+
+
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
