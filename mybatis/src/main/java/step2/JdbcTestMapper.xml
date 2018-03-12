@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- JdbcTestMapper.xml 파일
+     => "jdbc_test" 테이블을 다루는 SQL문이 들어 있다.
+  -->
+  
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace 다른 파일에 있는 SQL문과 구분하기 위한 그룹명이다. -->
+<mapper namespace="JdbcTestMapper">
+
+  
+
+</mapper>  

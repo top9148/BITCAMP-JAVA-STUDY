@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- DAO 객체를 자동으로 생성하려면,
+     namespace의 값이 인터페이스 이름과 같아야 한다. -->
+<mapper namespace="java100.app.dao.MemberDao">
+
+    <resultMap type="member" id="memberMap">
+        <id column="no" property="no"/>
+        <!-- 컬럼 이름과 프로퍼티 이름이 같아서 생략! -->
+        <!--  
+        <result column="name" property="name"/>
+        <result column="email" property="email"/>
+        -->
+        <result column="pwd" property="password"/>
+        <result column="regdt" property="createdDate"/>
+    </resultMap>
+
+    <sql id="select1">
+        select 
+            no,
+            name,
+            email,
+            regdt
+    </sql>
+
+    <select id="findAll" resultMap="memberMap" parameterType="map">
+        <include refid="select1"/>
+        from ex_memb    
+
+        <if test="words != null">
+	        <where>
+	            name in 
+	            <foreach collection="words" item="word" 
+	                     open="(" close=")" separator=",">
+	                #{word}
+	            </foreach>
+	            or email in 
+                <foreach collection="words" item="word" 
+                         open="(" close=")" separator=",">
+                    #{word}
+                </foreach>
+	        </where>
+        </if>
+        
+        <!-- 정렬 조건에 따라 SQL문을 변경한다.-->
+        order by 
+        <choose>
+            <when test="orderColumn == 'email' and align == 'asc'">
+                email asc
+            </when>
+            <when test="orderColumn == 'email' and align == 'desc'">
+                email desc
+            </when>
+            <when test="orderColumn == 'regdt' and align == 'asc'">
+                regdt asc
+            </when>
+            <when test="orderColumn == 'regdt' and align == 'desc'">
+                regdt desc
+            </when>
+            <when test="orderColumn == 'name' and align == 'desc'">
+                name desc
+            </when>
+            <otherwise>
+                name asc
+            </otherwise>
+        </choose>
+        
+        <!-- 페이지징 처리 -->
+        limit #{startIndex}, #{size}
+    </select>
+    
+    <select id="findByNo" resultMap="memberMap" parameterType="int">
+        <include refid="select1"/>
+        from ex_memb
+        where no=#{value}
+    </select>
+    
+    <select id="findByEmailAndPassword" 
+            resultMap="memberMap" parameterType="map">
+        <include refid="select1"/>
+        from ex_memb
+        where email=#{email} and pwd=password(#{password})
+    </select>
+    
+    <select id="countAll" resultType="int">
+        select count(*) from ex_memb
+    </select>
+    
+    <insert id="insert" parameterType="member">
+        insert into ex_memb(name,email,pwd,regdt)
+        values(#{name},#{email},password(#{password}),now())
+    </insert>
+
+    <update id="update" parameterType="member">
+        update ex_memb set 
+            name=#{name},
+            email=#{email},
+            pwd=password(#{password})
+        where no=#{no}
+    </update>
+
+    <delete id="delete" parameterType="int">
+        delete from ex_memb
+        where no=#{value}
+    </delete>
+    
+</mapper>  
+
+
+
+
+
+
+
+
+

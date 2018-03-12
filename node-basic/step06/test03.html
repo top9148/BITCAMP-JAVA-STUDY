@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<button id="btn1">눌러라!</button>
+
+<!-- 외부 자바스크립트 라이브러리 사용법 -->
+
+<!-- 3) 패키지 관리 프로그램(ex: npm, bower 등)을 사용하여 
+        라이브러리 관련 파일을 자동으로 다운로드 받는다. 
+-->
+<script type="text/javascript" src="node_modules/jquery/dist/jquery.js"></script>
+
+<script type="text/javascript">
+$('#btn1').on('click', function() {
+    window.alert('오호라!!!')
+});
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+

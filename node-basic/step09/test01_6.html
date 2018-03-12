@@ -1,0 +1,54 @@
+<!-- AJAX API 사용법 -->
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>AJAX</title>
+</head>
+<body>
+
+<button id="btn">비동기 POST 요청</button><br>
+
+<script type="text/javascript">
+
+var btn = window.document.querySelector('#btn');
+
+btn.onclick = function() {
+	var xhr = new XMLHttpRequest();
+	
+	xhr.onreadystatechange = function() {
+	    if (xhr.readyState < 4) return;
+	    
+	    // 서버의 응답 상태가 200 일 때만 작업을 수행한다.
+	    if (xhr.status != 200) {
+	        console.log('서버 실행 오류!');
+	        return;
+	    }
+	        
+	    console.log(xhr.responseText);	    
+	};
+	
+	xhr.open('POST', 'http://localhost:8888/okok', true);
+	
+	// POST 요청일 때 서버에 보내는 콘텐츠 타입을 헤더에 추가해야 한다.
+	xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+	
+	// GET 요청은 URL 뒤에 데이터를 붙여 보내지만,
+	// POST 요청은 send() 메서드의 파라미터로 보낸다.
+	xhr.send("name=aaa&age=20&working=true");   
+}
+
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

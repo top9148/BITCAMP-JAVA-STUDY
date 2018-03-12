@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<script>
+// 페이지 변수
+var name = "홍길동"
+
+function test() {
+    var name2; // 로컬 변수
+    
+    name = "임꺽정"
+    name2 = "유관순"
+}
+
+test()
+
+console.log(name)
+
+// => 모든 페이지 변수는 window 객체에 소속된다.
+console.log(window.name)
+
+console.log(name2)
+
+
+
+</script>
+</body>
+</html>
+
+
+
+
+
+
+

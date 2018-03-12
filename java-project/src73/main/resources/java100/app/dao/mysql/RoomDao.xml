@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- DAO 객체를 자동으로 생성하려면,
+     namespace의 값이 인터페이스 이름과 같아야 한다. -->
+<mapper namespace="java100.app.dao.RoomDao">
+
+    <resultMap type="room" id="roomMap">
+        <id column="no" property="no"/>
+        <!-- 컬럼 이름과 프로퍼티 이름이 같아서 생략! -->
+        <!--  
+        <result column="capacity" property="capacity"/>
+        <result column="name" property="name"/>
+        -->
+        <result column="loc" property="location"/>
+    </resultMap>
+
+    <sql id="select1">
+        select 
+            no,
+            loc,
+            name,
+            capacity
+    </sql>
+
+    <select id="findAll" resultMap="roomMap" parameterType="map">
+        <include refid="select1"/>
+        from ex_room    
+
+        <if test="words != null">
+	        <where>
+	            name in 
+	            <foreach collection="words" item="word" 
+	                     open="(" close=")" separator=",">
+	                #{word}
+	            </foreach>
+	            or loc in 
+                <foreach collection="words" item="word" 
+                         open="(" close=")" separator=",">
+                    #{word}
+                </foreach>
+	        </where>
+        </if>
+        
+        <!-- 정렬 조건에 따라 SQL문을 변경한다.-->
+        order by 
+        <choose>
+            <when test="orderColumn == 'name' and align == 'desc'">
+                name desc
+            </when>
+            <otherwise>
+                name asc
+            </otherwise>
+        </choose>
+        
+        <!-- 페이지징 처리 -->
+        limit #{startIndex}, #{size}
+    </select>
+    
+    <select id="countAll" resultType="int">
+        select count(*) from ex_room
+    </select>
+    
+    <insert id="insert" parameterType="member">
+        insert into ex_room(loc,name,capacity)
+        values(#{location},#{name},#{capacity})
+    </insert>
+
+    <delete id="delete" parameterType="int">
+        delete from ex_room
+        where no=#{value}
+    </delete>
+    
+</mapper>  
+
+
+
+
+
+
+
+
+

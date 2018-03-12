@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:component-scan base-package="step11"/>         
+    
+    <!-- 우리가 만든 클래스 대신에 mybatis가 제공하는 
+         SqlSessionFactoryBean 클래스 사용하기! 
+    -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!-- 만약 mybatis-config.xml 파일에 있는 내용을 
+             여기에서 모두 설정했다면 이 설정파일을 읽어올 필요가 없다. -->
+        <!--  
+        <property name="configLocation" value="step11/mybatis-config.xml"/>
+        -->
+        
+        <!-- mybatis에서 제공하는 SqlSessionFactoryBean 클래스를 사용할 때는 
+             DataSource를 mybatis에서 생성하지 않는다.
+             스프링에서 제공하는 DataSource를 사용해야 한다. -->
+        <property name="dataSource" ref="dataSource"/>   
+        
+        <!-- 맵퍼 파일의 위치를 여기에서 지정할 수 있다. -->
+        <property name="mapperLocations" value="classpath*:step11/*Mapper.xml"/>
+        
+        <!-- 타입에 별명을 자동으로 부여할 수 있도록 
+             패키지를 지정할 수 있다. 
+             즉 그 패키지에 소속된 모든 클래스에 대해 별명을 자동으로 부여할 것이다.-->
+        <property name="typeAliasesPackage" value="step11"/> 
+              
+    </bean>
+    
+    <!-- 스프링에서 DataSource 객체 준비 -->
+    <bean id="dataSource" 
+          class="org.apache.commons.dbcp2.BasicDataSource" 
+          destroy-method="close">
+	    <property name="driverClassName" value="${jdbc.driverClassName}" />
+	    <property name="url" value="${jdbc.url}" />
+        <property name="username" value="${jdbc.username}" />
+	    <property name="password" value="${jdbc.password}" />
+	</bean>
+    
+    <!-- 지정한 .properties 파일을 읽어서 메모리에 값을 
+         준비해주는 도우미 객체를 준비한다. -->
+    <context:property-placeholder location="step11/jdbc.properties"/>
+</beans>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

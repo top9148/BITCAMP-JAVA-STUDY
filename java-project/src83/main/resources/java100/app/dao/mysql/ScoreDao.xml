@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- DAO 객체를 자동으로 생성하려면,
+     namespace의 값이 인터페이스 이름과 같아야 한다. -->
+<mapper namespace="java100.app.dao.ScoreDao">
+
+    <sql id="select1">
+        select 
+            no, 
+            name, 
+            (kor + eng + math) as sum,
+            ((kor + eng + math) / 3) as aver
+    </sql>
+
+    <select id="findAll" resultType="score" parameterType="map">
+        <include refid="select1"/>
+        from ex_score
+
+        <if test="words != null">
+	        <where>
+	            <foreach collection="words" item="word">
+	                or name like '${word}%'
+	            </foreach>
+	        </where>
+        </if>
+        
+        <!-- 정렬 조건에 따라 SQL문을 변경한다.-->
+        order by 
+        <choose>
+            <when test="orderColumn == 'sum' and align == 'desc'">
+                sum desc
+            </when>
+            <when test="orderColumn == 'sum' and align == 'asc'">
+                sum asc
+            </when>
+            <when test="orderColumn == 'name' and align == 'desc'">
+                name desc
+            </when>
+            <otherwise>
+                name asc
+            </otherwise>
+        </choose>
+        
+        <!-- 페이지징 처리 -->
+        limit #{startIndex}, #{size}
+    </select>
+    
+    <select id="findByNo" resultType="score" parameterType="int">
+        <include refid="select1"/>
+          ,kor 
+          ,eng
+          ,math
+        from ex_score
+        where no=#{value}
+    </select>
+    
+    <select id="countAll" resultType="int">
+        select count(*) from ex_score
+    </select>
+    
+    <insert id="insert" parameterType="score">
+        insert into ex_score(name,kor,eng,math) 
+        values(#{name},#{kor},#{eng},#{math})
+    </insert>
+
+    <update id="update" parameterType="score">
+        update ex_score set 
+            name=#{name},
+            kor=#{kor},
+            eng=#{eng},
+            math=#{math} 
+        where no=#{no}
+    </update>
+
+    <delete id="delete" parameterType="int">
+        delete from ex_score
+        where no=#{value}
+    </delete>
+    
+</mapper>  
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,52 @@
+<!-- AJAX API 사용법 -->
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>AJAX</title>
+</head>
+<body>
+
+<button id="btn">화면 일부 가져오기</button><br>
+
+<div id="footer"></div>
+
+<script type="text/javascript">
+
+var btn = window.document.querySelector('#btn');
+
+btn.onclick = function() {
+	var xhr = new XMLHttpRequest();
+	
+	xhr.onreadystatechange = function() {
+	    if (xhr.readyState < 4) return;
+	    
+	    if (xhr.status != 200) {
+	        window.alert('서버 실행 오류!');
+	        return;
+	    }
+	        
+	    var footerDiv = document.querySelector("#footer");
+	    
+	    // 서버에서 화면의 일부분을 받아 기존 페이지에 붙인다. 
+	    footerDiv.innerHTML = xhr.responseText;
+	};
+	
+	xhr.open('GET', 'http://localhost:8888/okok', true);
+	xhr.send();   
+}
+
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>성적관리</title>
+<link rel='stylesheet' href='../node_modules/bootstrap/dist/css/bootstrap.min.css'>
+<link rel='stylesheet' href='../css/common.css'>
+</head>
+<body>
+<div class='container'>
+
+<header>
+<nav class='navbar navbar-expand-lg navbar-light bg-light'>
+<a class='navbar-brand' href='../index.html'>
+  <img src='/bitcamp-java-project/images/bootstrap-solid.svg' width='30' height='30' class='d-inline-block align-top' alt=''>
+  비트캠프
+</a>
+
+<button class='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarNav' aria-controls='navbarNav' aria-expanded='false' aria-label='Toggle navigation'>
+  <span class='navbar-toggler-icon'></span>
+</button>
+<div class='collapse navbar-collapse' id='navbarNav'>
+<ul class='navbar-nav mr-auto'>
+  <li class='nav-item'>
+    <a class='nav-link' href='../score/list.html'>성적</a>
+  </li>
+  <li class='nav-item'>
+    <a class='nav-link' href='../member/list.html'>회원</a>
+  </li>
+  <li class='nav-item'>
+    <a class='nav-link' href='../board/list.html'>게시판</a>
+  </li>
+  <li class='nav-item'>
+    <a class='nav-link' href='../room/list.html'>강의실</a>
+  </li>
+</ul>
+
+홍길동<a href="/bitcamp-java-project/app/auth/logout" 
+           class='btn btn-light btn-sm'>로그아웃</a>
+    </div>
+</nav>
+</header>
+
+<h1>성적 목록</h1>
+
+<nav class="navbar navbar-light justify-content-between">
+  <a href='form.html' class='btn btn-primary btn-sm'>추가</a>
+  <form class="form-inline">
+    <input id="words" name="words"
+           class="form-control form-control-sm mr-sm-2" type="search" 
+           placeholder="검색" aria-label="Search">
+    <button id="searchBtn" class="btn btn-sm btn-outline-success my-2 my-sm-0" 
+            type="button">Search</button>
+  </form>
+</nav>
+
+<table id="list" class='table table-hover'>
+<thead>
+<tr>
+    <th>번호</th><th>이름</th><th>합계</th><th>평균</th>
+</tr>
+</thead>
+
+<tbody></tbody>
+</table>
+
+<nav aria-label="Page navigation">
+  <ul class="pagination justify-content-center">
+    <li class="page-item">
+        <a id="prevBtn" class="page-link" tabindex="-1">이전</a></li>
+        
+    <li class="page-item">
+        <a id="currBtn" class="page-link" href="#">1</a></li>
+    
+    <li class="page-item ">
+        <a id="nextBtn" class="page-link" tabindex="0">다음</a></li>
+  </ul>
+</nav>
+
+<footer>
+    비트캠프 자바100기@2017
+</footer>
+</div>
+
+<script src='/bitcamp-java-project/node_modules/jquery/dist/jquery.slim.min.js'></script>
+<script src='/bitcamp-java-project/node_modules/popper.js/dist/umd/popper.min.js'></script>
+<script src='/bitcamp-java-project/node_modules/bootstrap/dist/js/bootstrap.min.js'></script>
+
+<script type="text/javascript">
+var words = document.querySelector('#words'),
+    searchBtn = document.querySelector('#searchBtn'),
+    prevBtn = document.querySelector('#prevBtn'),
+    currBtn = document.querySelector('#currBtn'),
+    nextBtn = document.querySelector('#nextBtn'),
+    currPageNo = 1;
+
+// 서버에서 목록 데이터를 가져온다.
+load(1);
+
+searchBtn.onclick = function(event) {
+    //event.preventDefault();
+    
+    load(1, {
+        "words": words.value
+    })
+};
+
+prevBtn.onclick = function() {
+    load(currPageNo - 1)
+};
+
+nextBtn.onclick = function() {
+    load(currPageNo + 1)
+};
+
+
+function load(pageNo, options) {
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState < 4) return;
+        if (xhr.status != 200) {
+            window.alert('서버 실행 오류!');
+            return;
+        }
+            
+        var tbody = document.querySelector('#list > tbody');
+        var result = JSON.parse(xhr.responseText);
+        
+        tbody.innerHTML = ""; // <tbody> 콘텐츠를 지운다.
+        
+        for (var data of result.list) {
+            var tr = document.createElement('tr');
+            tr.innerHTML =  
+                "<td>" + data.no + "</td>" + 
+                "<td><a href='form.html?no=" + data.no + "'>" + data.name + "</a></td>" + 
+                "<td>" + data.sum + "</td>" +
+                "<td>" + data.aver + "</td>";
+            tbody.appendChild(tr);
+        }
+        
+        currPageNo = result.pageNo;
+        currBtn.innerHTML = currPageNo;
+        
+        if (result.pageNo == 1) {
+            prevBtn.parentNode.className += " disabled";
+        } else {
+            prevBtn.parentNode.className = 
+                prevBtn.parentNode.className.replace(/disabled/i, "");
+        }
+        
+        if (result.lastPageNo == result.pageNo) {
+            nextBtn.parentNode.className += " disabled"
+        } else {
+            nextBtn.parentNode.className = 
+                nextBtn.parentNode.className.replace(/disabled/i, "");
+        }
+    };
+    
+    if (options == undefined) {
+        options = {};
+    }
+    options['pn'] = pageNo;
+    
+    xhr.open('GET', '../json/score/list?' + toQueryString(options), true);
+    xhr.send(); 
+}
+
+function toQueryString(obj) {
+    var qs = '';
+    for (var propName in obj) {
+        if (qs.length > 0) qs += '&';
+        
+        qs += propName + '=' + obj[propName]
+    }
+    return qs;
+}
+</script>
+
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

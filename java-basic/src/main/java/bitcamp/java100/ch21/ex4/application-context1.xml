@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <context:component-scan base-package="bitcamp.java100.ch21.ex4"/>         
+    
+    <bean id="myAdvice" class="bitcamp.java100.ch21.ex4.MyAdvice"/>
+    
+    <aop:config>
+      <aop:aspect id="aspect1" ref="myAdvice">
+          <!-- 메서드 앞, 뒤로 삽입되어 실행되는 메서드를 
+               "advice"라 부른다.
+          
+               advice 메서드(doBefore())가 호출될 때 
+               target 메서드(m1())가 받을 파라미터 값을 전달받고 싶다면,
+               다음과 같이 expression에 지정하라!
+                -->
+          <aop:before 
+            pointcut="execution(* bitcamp.java100.ch21.ex4.X.*(..)) and args(name)" 
+            method="doBefore"/>
+            
+          <!-- 
+               advice(doAfterReturning())가 호출될 때 
+               target 메서드(m1())가 리턴한 값을 받고 싶다면, 
+               다음과 같이 returning 속성을 지정하라!
+               
+               returning="리턴값을 받을 advice의 파라미터 이름" 
+               -->
+          <aop:after-returning 
+            pointcut="execution(* bitcamp.java100.ch21.ex4.X.*(..))" 
+            method="doAfterReturning"
+            returning="returnValue"/>
+          
+          <!-- 
+               advice(doAfterReturning())가 호출될 때 
+               target 메서드(m1())의 예외 객체를 받고 싶다면, 
+               다음과 같이 throwing 속성을 지정하라!
+               
+               throwing="예외 객체를 받을 advice의 파라미터 이름" 
+               -->
+          <aop:after-throwing 
+            pointcut="execution(* bitcamp.java100.ch21.ex4.X.*(..))"
+            method="doAfterThrowing"
+            throwing="error"/>
+            
+      </aop:aspect>
+    </aop:config>
+    
+</beans>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

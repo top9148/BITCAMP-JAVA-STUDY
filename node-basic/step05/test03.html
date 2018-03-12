@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h1>안녕하세요!</h1>
+
+<script type="text/javascript">
+//예외 처리를 하지 않았을 때 문제점!
+console.log("111111");
+
+window.alarm("okok");
+
+
+// 위의 코드에서 예외가 발생하면 
+// 즉시 <script> 태그를 나간다. 
+// 따라서 예외가 발생한 코드의 다음 줄부터는 실행되지 않는다.
+// 물론 이 태그만 실행하지 않는다는 것이지 다음 <script> 태그는 
+// 그대로 실행한다.
+console.log("222222");
+</script>
+
+
+<script type="text/javascript">
+console.log("3333");
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h1>안녕하세요!</h1>
+
+<script type="text/javascript">
+// 예외 처리를 하지 않았을 때 문제점!
+console.log("111111");
+
+window.alarm("okok");
+
+// 위 코드에서 예외가 발생하면 다음 코드는 실행되지 않는다. 
+// 이런 것에 주의할 것!
+var hello = function() {
+    window.alert("안녕하세요!");
+}
+</script>
+
+
+<script type="text/javascript">
+hello();
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+

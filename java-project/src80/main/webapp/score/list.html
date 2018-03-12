@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>성적관리</title>
+<link rel='stylesheet' href='../node_modules/bootstrap/dist/css/bootstrap.min.css'>
+<link rel='stylesheet' href='../css/common.css'>
+</head>
+<body>
+<div class='container'>
+
+<header></header>
+
+<h1>성적 목록(powered by Handlebars)</h1>
+
+<nav class="navbar navbar-light justify-content-between">
+  <a href='form.html' class='btn btn-primary btn-sm'>추가</a>
+  <form class="form-inline">
+    <input id="words" name="words"
+           class="form-control form-control-sm mr-sm-2" type="search" 
+           placeholder="검색" aria-label="Search">
+    <button id="searchBtn" class="btn btn-sm btn-outline-success my-2 my-sm-0" 
+            type="button">Search</button>
+  </form>
+</nav>
+
+<table id="list" class='table table-hover'>
+<thead>
+<tr>
+    <th>번호</th><th>이름</th><th>합계</th><th>평균</th>
+</tr>
+</thead>
+
+<tbody></tbody>
+</table>
+
+<nav aria-label="Page navigation">
+  <ul class="pagination justify-content-center">
+    <li class="page-item">
+        <a id="prevBtn" class="page-link" tabindex="-1">이전</a></li>
+        
+    <li class="page-item">
+        <a id="currBtn" class="page-link" href="#">1</a></li>
+    
+    <li class="page-item ">
+        <a id="nextBtn" class="page-link" tabindex="0">다음</a></li>
+  </ul>
+</nav>
+
+<footer></footer>
+
+</div>
+
+<script id="template1" type="text/x-handlebars-template">
+{{#each list}}
+<tr>
+  <td>{{no}}</td>
+  <td><a href="form.html?no={{no}}">{{name}}</a></td>
+  <td>{{sum}}</td>
+  <td>{{aver}}</td>
+</tr>
+{{/each}}
+</script>
+
+<script src='../node_modules/handlebars/dist/handlebars.min.js'></script>
+<script src='../node_modules/jquery/dist/jquery.min.js'></script>
+<script src='../node_modules/popper.js/dist/umd/popper.min.js'></script>
+<script src='../node_modules/bootstrap/dist/js/bootstrap.min.js'></script>
+
+<script type="text/javascript">
+var words = $('#words'),
+    prevBtn = $('#prevBtn'),
+    currBtn = $('#currBtn'),
+    nextBtn = $('#nextBtn'),
+    tbody = $('#list > tbody'),
+    currPageNo = 1,
+    member = null,
+    template1Src = $('#template1').html(),
+    template1Engine = Handlebars.compile(template1Src);
+
+
+$(document.body).on('login', (event, obj) => {
+    console.log('로그인 정보 가져오기:', obj.status);
+    load();
+});
+
+$('header').load('../header.html');
+
+$('footer').load('../footer.html');
+
+
+$('#searchBtn').click(() => {
+    //event.preventDefault();
+    load(1, {
+        "words": words.value
+    })
+});
+
+prevBtn.click(() => {
+    load(currPageNo - 1)
+});
+
+nextBtn.click(() => {
+    load(currPageNo + 1)
+});
+
+
+function load(pageNo, options) {
+    
+    if (options == undefined) options = {};
+    options.pn = pageNo;
+    
+    $.ajax('../json/score/list', {
+        /*method: 'GET',*/
+        data: options,
+        dataType: 'json',
+        success: (result) => {
+            
+            //console.log(result);
+            tbody.html(template1Engine(result));
+            
+            currPageNo = result.pageNo;
+            currBtn.html(currPageNo);
+            
+            if (result.pageNo == 1) {
+                $(prevBtn.parent()).addClass("disabled");
+            } else {
+                $(prevBtn.parent()).removeClass("disabled");
+            }
+            
+            if (result.lastPageNo == result.pageNo) {
+                $(nextBtn.parent()).addClass("disabled");
+            } else {
+                $(nextBtn.parent()).removeClass("disabled");
+            }
+        },
+        error: () => {
+            window.alert('서버 실행 오류!');
+        }
+    });
+}
+
+
+</script>
+
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

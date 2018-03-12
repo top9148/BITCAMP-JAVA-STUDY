@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- DAO 객체를 자동으로 생성하려면,
+     namespace의 값이 인터페이스 이름과 같아야 한다. -->
+<mapper namespace="java100.app.dao.BoardDao">
+
+    <resultMap type="board" id="boardMap">
+        <id column="no" property="no"/>
+        <result column="title" property="title"/>
+        <result column="conts" property="content"/>
+        <result column="regdt" property="regDate"/>
+        <result column="vwcnt" property="viewCount"/>
+        
+        <!-- 게시글 작성자 정보를 담을 수 있도록 설정한다. -->
+        <association property="writer" javaType="member">
+            <id column="m_no" property="no"/>
+            <result column="m_name" property="name"/>
+        </association>
+    </resultMap>
+
+    <sql id="select1">
+        select 
+            no,
+            title,
+            regdt,
+            vwcnt
+    </sql>
+
+    <select id="findAll" resultMap="boardMap" parameterType="map">
+        select 
+            b.no,
+            b.title,
+            b.regdt,
+            b.vwcnt,
+            m.no as m_no,
+            m.name as m_name
+        from ex_board as b join ex_memb as m on b.mno=m.no
+
+        <if test="words != null">
+	        <where>
+	            <foreach collection="words" item="word">
+	                or title like '%${word}%'
+	            </foreach>
+	        </where>
+        </if>
+        
+        <!-- 정렬 조건에 따라 SQL문을 변경한다.-->
+        order by 
+        <choose>
+            <when test="orderColumn == 'regdt' and align == 'desc'">
+                regdt desc
+            </when>
+            <when test="orderColumn == 'regdt' and align == 'asc'">
+                regdt asc
+            </when>
+            <when test="orderColumn == 'vwcnt' and align == 'desc'">
+                vwcnt desc
+            </when>
+            <when test="orderColumn == 'vwcnt' and align == 'asc'">
+                vwcnt asc
+            </when>
+            <otherwise>
+                no desc
+            </otherwise>
+        </choose>
+        
+        <!-- 페이지징 처리 -->
+        limit #{startIndex}, #{size}
+    </select>
+    
+    <select id="findByNo" resultMap="boardMap" parameterType="int">
+        <include refid="select1"/>
+          ,conts
+        from ex_board
+        where no=#{value}
+    </select>
+    
+    <select id="countAll" resultType="int">
+        select count(*) from ex_board
+    </select>
+    
+    <insert id="insert" parameterType="board">
+        insert into ex_board(title,conts,regdt,mno)
+        values(#{title},#{content},now(),#{writer.no})
+    </insert>
+
+    <update id="update" parameterType="board">
+        update ex_board set 
+            title=#{title}, 
+            conts=#{content}
+        where no=#{no}
+    </update>
+
+    <update id="updateViewCount" parameterType="int">
+        update ex_board set 
+            vwcnt=vwcnt + 1
+        where no=#{value}
+    </update>
+
+    <delete id="delete" parameterType="int">
+        delete from ex_board
+        where no=#{value}
+    </delete>
+    
+</mapper>  
+
+
+
+
+
+
+
+
+

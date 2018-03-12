@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>성적관리</title>
+<link rel='stylesheet' href='../node_modules/bootstrap/dist/css/bootstrap.min.css'>
+<link rel='stylesheet' href='../css/common.css'>
+</head>
+<body>
+<div class='container'>
+
+<header>
+<nav class='navbar navbar-expand-lg navbar-light bg-light'>
+<a class='navbar-brand' href='../index.html'>
+  <img src='/bitcamp-java-project/images/bootstrap-solid.svg' width='30' height='30' class='d-inline-block align-top' alt=''>
+  비트캠프
+</a>
+
+<button class='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarNav' aria-controls='navbarNav' aria-expanded='false' aria-label='Toggle navigation'>
+  <span class='navbar-toggler-icon'></span>
+</button>
+<div class='collapse navbar-collapse' id='navbarNav'>
+<ul class='navbar-nav mr-auto'>
+  <li class='nav-item'>
+    <a class='nav-link' href='../score/list'>성적</a>
+  </li>
+  <li class='nav-item'>
+    <a class='nav-link' href='../member/list'>회원</a>
+  </li>
+  <li class='nav-item'>
+    <a class='nav-link' href='../board/list'>게시판</a>
+  </li>
+  <li class='nav-item'>
+    <a class='nav-link' href='../room/list'>강의실</a>
+  </li>
+</ul>
+
+홍길동<a href="/bitcamp-java-project/app/auth/logout" 
+           class='btn btn-light btn-sm'>로그아웃</a>
+    </div>
+</nav>
+</header>
+
+<h1>성적 정보</h1>
+
+<form>
+<div class='form-group row my-view'>
+<label for='no' class='col-sm-2 col-form-label'>번호</label>
+<div class='col-sm-10'>
+<input class='form-control' readonly id='no' type='number' 
+       name='no'> 
+</div>
+</div>
+<div class='form-group row'>
+<label for='name' class='col-sm-2 col-form-label'>이름</label>
+<div class='col-sm-10'>
+<input class='form-control' id='name' type='text' name='name'>
+</div>
+</div>
+<div class='form-group row'>
+<label for='kor' class='col-sm-2 col-form-label'>국어</label>
+<div class='col-sm-10'>
+<input class='form-control' id='kor' type='number' name='kor'>
+</div>
+</div>
+<div class='form-group row'>
+<label for='eng' class='col-sm-2 col-form-label'>영어</label>
+<div class='col-sm-10'>
+<input class='form-control' id='eng' type='number' name='eng'>
+</div>
+</div>
+<div class='form-group row'>
+<label for='math' class='col-sm-2 col-form-label'>수학</label>
+<div class='col-sm-10'>
+<input class='form-control' id='math' type='number' name='math'>
+</div>
+</div>
+<div class='form-group row my-view'>
+<label for='sum' class='col-sm-2 col-form-label'>합계</label>
+<div class='col-sm-10'>
+<input class='form-control' readonly id='sum' type='text'> 
+</div>
+</div>
+<div class='form-group row my-view'>
+<label for='aver' class='col-sm-2 col-form-label'>평균</label>
+<div class='col-sm-10'>
+<input class='form-control' readonly id='aver' type='text'> 
+            
+</div>
+</div>
+
+<div class='form-group row'>
+<div class='col-sm-10'>
+<button id="addBtn" type="button" class='btn btn-primary btn-sm my-new'>추가</button>
+<button id="updateBtn" type="button" class='btn btn-primary btn-sm my-view'>변경</button>
+<button id="deleteBtn" type="button" class='btn btn-primary btn-sm my-view'>삭제</button>
+</div>
+</div>
+</form>
+
+<footer>
+    비트캠프 자바100기@2017
+</footer>
+</div>
+
+<script src='/bitcamp-java-project/node_modules/jquery/dist/jquery.slim.min.js'></script>
+<script src='/bitcamp-java-project/node_modules/popper.js/dist/umd/popper.min.js'></script>
+<script src='/bitcamp-java-project/node_modules/bootstrap/dist/js/bootstrap.min.js'></script>
+
+<script type="text/javascript">
+var addBtn = document.querySelector('#addBtn'),
+    updateBtn = document.querySelector('#updateBtn'),
+    deleteBtn = document.querySelector('#deleteBtn'),
+    noItem = document.querySelector('#no'),
+    nameItem = document.querySelector('#name'),
+    korItem = document.querySelector('#kor'),
+    engItem = document.querySelector('#eng'),
+    sumItem = document.querySelector('#sum'),
+    averItem = document.querySelector('#aver'),
+    mathItem = document.querySelector('#math');
+
+var index = location.href.indexOf('?');
+if (index != -1) { // 기존 데이터를 조회할 경우,
+    var qs = location.href.substr(index + 1);
+    var arr = qs.split('=');
+    load(arr[1])
+    var el = document.querySelectorAll('.my-new');
+    for (var i = 0; i < el.length; i++) {
+        el[i].style['display'] = 'none';
+    }
+    
+} else { // 신규 데이터 입력일 경우,
+    var el = document.querySelectorAll('.my-view');
+    for (var i = 0; i < el.length; i++) {
+        el[i].style['display'] = 'none';
+    }
+}
+
+
+addBtn.onclick = function() {
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState < 4) return;
+        if (xhr.status != 200) {
+            window.alert('서버 실행 오류!');
+            return;
+        }
+        
+        location.href = "list.html";
+    };
+    
+    xhr.open('POST', '../json/score/add', true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.send(toQueryString({
+        name: nameItem.value,
+        kor: korItem.value,
+        eng: engItem.value,
+        math: mathItem.value
+    }));
+}
+
+updateBtn.onclick = function() {
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState < 4) return;
+        if (xhr.status != 200) {
+            window.alert('서버 실행 오류!');
+            return;
+        }
+        
+        location.href = "list.html";
+    };
+    
+    xhr.open('POST', '../json/score/update', true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.send(toQueryString({
+        no: noItem.value,
+        name: nameItem.value,
+        kor: korItem.value,
+        eng: engItem.value,
+        math: mathItem.value
+    }));
+}
+
+deleteBtn.onclick = function() {
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState < 4) return;
+        if (xhr.status != 200) {
+            window.alert('서버 실행 오류!');
+            return;
+        }
+        
+        location.href = "list.html";
+    };
+    
+    xhr.open('GET', '../json/score/delete?no=' + noItem.value, true);
+    xhr.send();
+}
+
+function toQueryString(obj) {
+    var qs = '';
+    for (var propName in obj) {
+        if (qs.length > 0) qs += '&';
+        
+        qs += propName + '=' + obj[propName]
+    }
+    return qs;
+}
+
+function load(no) {
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState < 4) return;
+        if (xhr.status != 200) {
+            window.alert('서버 실행 오류!');
+            return;
+        }
+        
+        var obj = JSON.parse(xhr.responseText);
+        
+        noItem.value = obj.data.no;
+        nameItem.value = obj.data.name;
+        korItem.value = obj.data.kor;
+        engItem.value = obj.data.eng;
+        mathItem.value = obj.data.math;
+        sumItem.value = obj.data.sum;
+        averItem.value = obj.data.aver;
+    };
+    
+    xhr.open('GET', '../json/score/' + no, true);
+    xhr.send();
+}
+
+</script>
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    

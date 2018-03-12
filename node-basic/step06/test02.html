@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<button id="btn1">눌러라!</button>
+
+<!-- 외부 자바스크립트 라이브러리 사용법 -->
+
+<!-- 2) 로컬에 받아서 사용한다. 
+        보통 금융이나 공공기관에서는 외부에서 라이브러리 변경하는 것을 
+        방지하기 위해서 자신들에 서버에 다운로드 받아두고
+        이 파일을 링크 건다.
+-->
+<script type="text/javascript" src="jquery-3.3.1.js"></script>
+
+<script type="text/javascript">
+$('#btn1').on('click', function() {
+    window.alert('오호라!!!')
+});
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+

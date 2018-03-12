@@ -1,0 +1,55 @@
+<!-- AJAX API 사용법 -->
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>AJAX</title>
+</head>
+<body>
+
+<button id="btn">JSON 데이터 가져오기</button><br>
+
+<div id="footer"></div>
+
+<script type="text/javascript">
+
+var btn = window.document.querySelector('#btn');
+
+btn.onclick = function() {
+	var xhr = new XMLHttpRequest();
+	
+	xhr.onreadystatechange = function() {
+	    if (xhr.readyState < 4) return;
+	    
+	    if (xhr.status != 200) {
+	        window.alert('서버 실행 오류!');
+	        return;
+	    }
+	        
+	    var footerDiv = document.querySelector("#footer");
+	    
+	    // 서버에서 데이터를 받아 화면을 만들어 붙인다.
+	    var obj = JSON.parse(xhr.responseText); // {"message":"자바100기"}
+	    
+	    footerDiv.innerHTML = 
+	      "<p style='background-color:gray; color:white;'>" + obj.message + "</p>";
+	};
+	
+	xhr.open('GET', 'http://localhost:8888/okok', true);
+	xhr.send();   
+}
+
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

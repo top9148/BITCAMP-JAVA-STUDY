@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>성적관리</title>
+<link rel='stylesheet' href='../node_modules/bootstrap/dist/css/bootstrap.min.css'>
+<link rel='stylesheet' href='../css/common.css'>
+</head>
+<body>
+<div class='container'>
+
+<header></header>
+
+<h1>성적 정보</h1>
+
+<form>
+<div class='form-group row my-view'>
+<label for='no' class='col-sm-2 col-form-label'>번호</label>
+<div class='col-sm-10'>
+<input class='form-control' readonly id='no' type='number' 
+       name='no'> 
+</div>
+</div>
+<div class='form-group row'>
+<label for='name' class='col-sm-2 col-form-label'>이름</label>
+<div class='col-sm-10'>
+<input class='form-control' id='name' type='text' name='name'>
+</div>
+</div>
+<div class='form-group row'>
+<label for='kor' class='col-sm-2 col-form-label'>국어</label>
+<div class='col-sm-10'>
+<input class='form-control' id='kor' type='number' name='kor'>
+</div>
+</div>
+<div class='form-group row'>
+<label for='eng' class='col-sm-2 col-form-label'>영어</label>
+<div class='col-sm-10'>
+<input class='form-control' id='eng' type='number' name='eng'>
+</div>
+</div>
+<div class='form-group row'>
+<label for='math' class='col-sm-2 col-form-label'>수학</label>
+<div class='col-sm-10'>
+<input class='form-control' id='math' type='number' name='math'>
+</div>
+</div>
+<div class='form-group row my-view'>
+<label for='sum' class='col-sm-2 col-form-label'>합계</label>
+<div class='col-sm-10'>
+<input class='form-control' readonly id='sum' type='text'> 
+</div>
+</div>
+<div class='form-group row my-view'>
+<label for='aver' class='col-sm-2 col-form-label'>평균</label>
+<div class='col-sm-10'>
+<input class='form-control' readonly id='aver' type='text'> 
+            
+</div>
+</div>
+
+<div class='form-group row'>
+<div class='col-sm-10'>
+<button id="addBtn" type="button" class='btn btn-primary btn-sm my-new'>추가</button>
+<button id="updateBtn" type="button" class='btn btn-primary btn-sm my-view'>변경</button>
+<button id="deleteBtn" type="button" class='btn btn-primary btn-sm my-view'>삭제</button>
+</div>
+</div>
+</form>
+
+<footer></footer>
+</div>
+
+<script src='../node_modules/jquery/dist/jquery.min.js'></script>
+<script src='../node_modules/popper.js/dist/umd/popper.min.js'></script>
+<script src='../node_modules/bootstrap/dist/js/bootstrap.min.js'></script>
+
+<script type="text/javascript">
+var addBtn = $('#addBtn'),
+    updateBtn = $('#updateBtn'),
+    deleteBtn = $('#deleteBtn'),
+    noItem = $('#no'),
+    nameItem = $('#name'),
+    korItem = $('#kor'),
+    engItem = $('#eng'),
+    sumItem = $('#sum'),
+    averItem = $('#aver'),
+    mathItem = $('#math');
+
+$('header').load('../header.html');
+$('footer').load('../footer.html');
+
+var index = location.href.indexOf('?');
+if (index != -1) { // 기존 데이터를 조회할 경우,
+    var qs = location.href.substr(index + 1);
+    var arr = qs.split('=');
+    $('.my-new').css('display', 'none');
+    $(() => {
+        $.ajax('../json/score/' + arr[1], {
+            dataType: 'json',
+            success: (result) => {
+                noItem.val(result.data.no);
+                nameItem.val(result.data.name);
+                korItem.val(result.data.kor);
+                engItem.val(result.data.eng);
+                mathItem.val(result.data.math);
+                sumItem.val(result.data.sum);
+                averItem.val(result.data.aver);
+            },
+            error: () => {
+                window.alert('서버 실행 오류!');
+            }
+        });
+    });
+    
+} else { // 신규 데이터 입력일 경우,
+    $('.my-view').css('display', 'none');
+}
+
+
+addBtn.click(() => {
+    if (korItem.val() == "" || engItem.val() == "" || mathItem.val() == "") {
+        alert("국어, 영어, 수학 점수는 필수 입력 항목입니다!");
+        return;
+    }
+    $.ajax('../json/score/add', {
+        data: {
+            name: nameItem.val(),
+            kor: korItem.val(),
+            eng: engItem.val(),
+            math: mathItem.val()
+        },
+        dataType: 'json',
+        method: 'POST',
+        success: (result) => {
+            location.href = "list.html";
+        },
+        error: () => {
+            window.alert('서버 실행 오류!');
+        }
+    });
+});
+
+updateBtn.click(() => {
+    $.ajax('../json/score/update', {
+        data: {
+            no: noItem.val(),
+            name: nameItem.val(),
+            kor: korItem.val(),
+            eng: engItem.val(),
+            math: mathItem.val()
+        },
+        dataType: 'json',
+        method: 'POST',
+        success: (result) => {
+            location.href = "list.html";
+        },
+        error: () => {
+            window.alert('서버 실행 오류!');
+        }
+    });
+});
+
+deleteBtn.click(() => {
+    $.ajax('../json/score/delete', {
+        data: {
+            no: noItem.val()
+        },
+        dataType: 'json',
+        success: (result) => {
+            location.href = "list.html";
+        },
+        error: () => {
+            window.alert('서버 실행 오류!');
+        }
+    });
+});
+
+
+
+</script>
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    

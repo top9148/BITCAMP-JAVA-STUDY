@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <context:component-scan base-package="bitcamp.java100.ch21.ex6"/>         
+    
+    <!-- @Aspect, @Before 등의 애노테이션을 이용하여 AOP 객체를 등록하려면, 
+         프록시 객체를 자동으로 생성해주는 객체가 필요하다.
+         다음 태그를 추가하라!  -->
+    <aop:aspectj-autoproxy/>
+    
+</beans>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

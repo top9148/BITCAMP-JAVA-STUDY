@@ -1,0 +1,62 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<title>팀선택</title>
+<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+<style>
+.box {
+    float: left;
+    width: 100px;
+    min-width: 100px;
+    height: 100px;
+    border: 1px solid gray;
+    margin: 5px;
+    text-align: center;
+    line-height: 80px;
+}
+
+.selected {
+    background-color: red;
+    color: white;
+    font-weight: bold;
+}
+
+</style>
+
+</head>
+<body>
+<div data-no="0" class="box col-2 text-truncate">김다솔,김준엽,서정혁,이해성,장욱진</div>
+<div data-no="1" class="box col-2 text-truncate">민혜린,윤재훈,장나성,이보미</div>
+<div data-no="2" class="box col-2 text-truncate">김지성,김정훈,강성현,김미애,황원철</div>
+<div data-no="3" class="box col-2 text-truncate">황지은,정소현,김석희,조인성</div>
+<div data-no="4" class="box col-2 text-truncate">김이든,최명송,윤효진,오세현</div>
+<div data-no="5" class="box col-2 text-truncate">박정남,이철희,심현석,이승서,송우정</div>
+<button id="btn1">팀선택!</button>
+
+
+<script src="node_modules/jquery/dist/jquery.js"></script>
+<script>
+
+$('#btn1').on('click', function(){
+    var timerId = window.setInterval(function(){
+        var no = Math.floor(Math.random() * 6);
+        $('div[data-no="' + prevNo + '"]').removeClass('selected')
+        $('div[data-no="' + no + '"]').addClass('selected')
+        prevNo = no;
+        count++;
+        if (count > 10) {
+            window.clearInterval(timerId)
+        }
+    }, 500);
+    prevNo = 0;
+    count = 0;
+});
+
+var count = 0;
+var prevNo = 0;
+
+
+</script>
+
+</body>
+</html>

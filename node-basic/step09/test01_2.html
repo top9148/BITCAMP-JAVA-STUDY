@@ -1,0 +1,48 @@
+<!-- AJAX API 사용법 -->
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>AJAX</title>
+</head>
+<body>
+
+<button id="btn">비동기 요청</button><br>
+
+<script type="text/javascript">
+
+var btn = window.document.querySelector('#btn');
+
+btn.onclick = function() {
+	var xhr = new XMLHttpRequest();
+	
+	// 비동기 요청일 경우, 
+	// 요청 상태가 변경될 때마다 호출될 함수를 등록해야 한다.
+	xhr.onreadystatechange = function() {
+	    // 이 함수에서 서버의 응답 결과를 처리해야 한다.
+	    console.log('요청 상태가 변경되었습니다.');
+	};
+	
+	// 비동기 요청일 때는 세번째 파라미터의 값을 true로 설정하라!
+	xhr.open('GET', 'http://localhost:8888/okok', true);
+	xhr.send(); // 비동기로 요청할 때는 응답 결과를 기다리지 않고 즉시 리턴한다.   
+	
+	// 그래서 responseText 값을 꺼내봐야 소용없다.
+	// 왜? 아직 서버에서 응답 결과를 받은 상태가 아니기 때문이다.
+	console.log(xhr.responseText)
+}
+
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

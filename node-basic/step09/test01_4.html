@@ -1,0 +1,44 @@
+<!-- AJAX API 사용법 -->
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>AJAX</title>
+</head>
+<body>
+
+<button id="btn">비동기 요청</button><br>
+
+<script type="text/javascript">
+
+var btn = window.document.querySelector('#btn');
+
+btn.onclick = function() {
+	var xhr = new XMLHttpRequest();
+	
+	xhr.onreadystatechange = function() {
+	    // 응답 완료했을 때 처리할 작업이 있다면,
+	    // 그 상태를 조건문으로 검사하라!
+	    if (xhr.readyState < 4) return;
+	        
+	    console.log(xhr.responseText);	    
+	};
+	
+	xhr.open('GET', 'http://localhost:8888/okok', true);
+	xhr.send();   
+}
+
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

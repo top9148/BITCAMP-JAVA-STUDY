@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h1>안녕하세요!</h1>
+
+<script type="text/javascript">
+"use strict"
+
+// HTML 페이지의 <script> 태그는 같은 메모리 공간을 사용한다.
+function f1() {console.log("f1()...")}
+</script>
+
+
+<script type="text/javascript">
+function f2() {console.log("f2()...")}
+</script>
+
+
+<script type="text/javascript">
+f1(); // OK
+f2(); // OK
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,53 @@
+<!-- DOM API 사용법 -->
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>HTML</title>
+</head>
+<body>
+  <div id="d1" class="c1">d1</div>
+  <div id="d2" class="c1">d2</div>
+  <div id="d3" class="c1">d3</div>
+  <div id="d4" class="c1">d4</div>
+  <div id="d5" class="c2">d5</div>
+  <div id="d6" class="c2">d6</div>
+  <div id="d7" class="c2">d7</div>
+  <div id="d8" class="c2">d8</div>
+
+<script>
+/* class 이름으로 태그 찾기
+=> document.getElementsByClassName("class 이름")
+*/
+var list = document.getElementsByClassName("c2") // => 리턴 값은 HTMLCollection 객체이다.
+for (var i = 0; i < list.length; i++) {
+  console.log(list[i])
+}
+
+
+// list 변수에 저장된 것은 순수 배열이 아니다.
+// 그래서 다음과 같이 for...in 문을 사용하면,
+// 원치않는 값까지 반복할 수 있다.
+// 따라서 for...in을 사용하지 말고 위의 구분을 사용하라!
+/*
+for (var i in list) {
+    console.log(i, list[i])
+}
+*/
+
+// list는 배열이 아니기 때문에 forEach()가 없다.
+/*
+list.forEach(function(value, index) {
+    console.log(index, value);
+});
+*/
+
+
+</script>
+</body>
+</html>
+
+
+
+
+<!-- -->

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+  <environments default="development">
+    
+    <!-- 사용할 DBMS 연결 정보 -->
+    <environment id="development">
+     
+      <!-- 트랜잭션(데이터를 변경하는 여러 SQL문을 한 단위로 다루기 위해 
+           묶어 놓은 것)을 어떻게 관리할 것인지 설정한다.
+           "JDBC" : mybatis에게 JDBC API를 사용하여 트랜잭션을 관리하게 한다. -->
+      <transactionManager type="JDBC"/>
+      
+      <!-- connection pool을 사용하겠다고 지정한다.  -->
+      <dataSource type="POOLED">
+        <property name="driver" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/studydb"/>
+        <property name="username" value="study"/>
+        <property name="password" value="1111"/>
+      </dataSource>
+    </environment>
+    
+    <!-- environment 태그는 여러 개를 선언할 수 있다.
+         예를 들면, 
+         개발용으로 사용할 DBMS 정보와
+         테스트할 때 사용할 DBMS 정보와
+         실제 운영할 때 사용할 DBMS 정보와 같이 
+         여러 개의 DBMS 연결 정보를 이 태그를 사용하여 등록할 수 있다.
+         
+         그 중에서 실제로 사용할 DBMS를 
+         environments 의 default 속성에 지정하라!
+         default="environment id 값"
+          -->
+  </environments>
+  
+  <!-- SQL문이 들어 있는 XML 파일의 위치 정보를 등록한다.
+       이 파일을 "SQL Mapper" 파일이라 부른다.
+       이 파일의 경로는 보통 자바 클래스 경로이다. -->
+  <mappers>
+  
+    <!-- JdbcTestMapper.xml 파일은 step2 자바 패키지에 있다. -->
+    <mapper resource="step2/JdbcTestMapper.xml"/>
+    
+  </mappers>
+  
+</configuration>
+
+
+
+
+
+
+

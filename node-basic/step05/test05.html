@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h1>안녕하세요!</h1>
+
+<script type="text/javascript">
+"use strict"
+
+// 글로벌 변수와 함수
+// => 모든 글로벌 변수와 함수는 window 객체의 멤버이다.
+var a = 100;
+function f1() {
+    console.log("f1()...")
+}
+window.b = 200;
+</script>
+
+
+<script type="text/javascript">
+console.log(a) // window. 을 생략해도 된다.
+console.log(window.a)
+
+f1(); // window. 을 생략해도 된다.
+window.f1();
+
+console.log(b); // window. 을 생략해도 된다.
+console.log(window.b);
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- JdbcTestMapper.xml 파일
+     => "jdbc_test" 테이블을 다루는 SQL문이 들어 있다.
+  -->
+  
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="JdbcTestMapper">
+
+    <!-- 컬럼 값을 객체에 담을 때 
+         컬럼 이름과 일치하는 객체 프로퍼티를 찾아서 담는다.
+         컬럼 이름과 일치하는 셋터가 있다면 
+         그 셋터를 호출하여 값을 저장한다.
+         예) no ==> setNo()
+             title ==> setTitle()
+             regdt ==> setRegdt()
+             vwcnt ==> setVwcnt()
+         문제는 컬럼 이름과 객체의 프로퍼티 이름이 일치하지 않는 경우이다.
+         해결책? 
+         컬럼의 값을 뽑을 때 별명을 부여하라! -->
+    <select id="findAll" resultType="board">
+        select 
+            no, 
+            title, 
+            regdt as createdDate, <!-- 프로퍼티 이름과 같게 별명을 짓는다. --> 
+            vwcnt viewCount <!-- as를 생략해야 된다. -->
+        from jdbc_test
+    </select>
+    
+    <insert id="insert" parameterType="board">
+        insert into jdbc_test(title,conts,regdt)
+        values(#{title},#{contents},now())
+    </insert>
+    
+    <update id="update" parameterType="board">
+        update jdbc_test set 
+            title=#{title}, 
+            conts=#{contents} 
+        where no=#{no}
+    </update>
+
+    <delete id="delete" parameterType="int">
+        delete from jdbc_test where no=#{value}
+    </delete>
+    
+    <select id="findByNo" resultType="board" parameterType="int">
+        select
+            no,
+            title,
+            conts contents,
+            regdt createdDate,
+            vwcnt viewCount
+        from jdbc_test
+        where no=#{value}
+    </select>
+</mapper>  
+
+
+
+
+
+
+
+
+
